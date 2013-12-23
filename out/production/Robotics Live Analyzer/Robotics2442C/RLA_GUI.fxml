@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="961.0" maxWidth="1700.0" minHeight="961.0" minWidth="1672.0" prefHeight="961.0" prefWidth="1679.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Robotics2442C.Controller">
+  <children>
+    <ScrollPane id="ScrollPane" layoutX="14.0" layoutY="74.0" prefHeight="862.0" prefViewportHeight="873.0" prefViewportWidth="205.0">
+      <content>
+        <ListView fx:id="teamList" onEditCommit="#newTeam" prefHeight="860.0" prefWidth="205.0" />
+      </content>
+    </ScrollPane>
+    <TextField fx:id="searchField" layoutX="14.0" layoutY="45.0" prefWidth="207.0" />
+    <MenuBar fx:id="menuBar" disable="false" focusTraversable="false" layoutX="14.0" layoutY="14.0" prefWidth="1651.0" useSystemMenuBar="false" visible="true">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#openApp" text="Open" />
+            <MenuItem mnemonicParsing="false" onAction="#saveApp" text="Save" />
+            <MenuItem mnemonicParsing="false" onAction="#saveAsApp" text="Save As" />
+            <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Close" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#initNewTeam" text="New Team" />
+            <MenuItem mnemonicParsing="false" onAction="#deleteTeam" text="Delete Team" />
+            <MenuItem mnemonicParsing="false" onAction="#initNewCompetition" text="New Competition" />
+            <MenuItem mnemonicParsing="false" onAction="#initDeleteCompetition" text="Delete Competition" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <TableView layoutX="228.0" layoutY="74.0" opacity="1.0" prefHeight="862.0" prefWidth="1437.0" visible="true">
+      <columns>
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="436.0" text="Competition" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="88.0" text="Match #" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Red Alliance 1" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Red Alliance 2" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Red Alliance 3" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Blue Alliance 1" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Blue Alliance 2" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Blue Alliance 3" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Red Score" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Blue Score" />
+      </columns>
+    </TableView>
+    <ChoiceBox fx:id="competitionChooser" layoutX="228.0" layoutY="45.0" prefHeight="22.0" prefWidth="436.0">
+      <items>
+      </items>
+    </ChoiceBox>
+  </children>
+</AnchorPane>
