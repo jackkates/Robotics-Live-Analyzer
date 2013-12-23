@@ -5,9 +5,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * Creator: jackkates
- * Date: 12/23/13
+ * @author jackkates
  */
+
 public class Dialog extends Stage {
 
     public Dialog(String title, Parent root) {

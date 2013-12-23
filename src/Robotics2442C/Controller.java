@@ -16,6 +16,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * @author Octogonapus
+ * @contributor jackkates
+ */
+
 public class Controller implements Initializable {
     /**
      * RLA_GUI.fxml
