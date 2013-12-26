@@ -1,8 +1,12 @@
 package Robotics2442C;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +19,12 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+/**
+ * TODO: Remove ChoiceBox and use something with the MenuBar to edit specific competitions, one at a time.
+ * TODO: The TableView will adapt properly to show data to do only with the selected competition.
+ * TODO: When not editing a competition, the TableView will show all competitions.
+ */
 
 /**
  * @author Octogonapus
@@ -91,6 +101,10 @@ public class Controller implements Initializable {
         Dialog.show("Really Delete Competition?", root, 353, 239);
     }
 
+    public void deleteConfirm(ActionEvent actionEvent) {
+        competitions.remove();
+    }
+
     public void openApp(ActionEvent actionEvent) {
         //TODO: Implement open function
     }
@@ -105,10 +119,6 @@ public class Controller implements Initializable {
 
     public void closeApp(ActionEvent actionEvent) {
         System.exit(0);
-    }
-
-    public void deleteConfirm(ActionEvent actionEvent) {
-        competitions.remove(competitionChooser.getValue());
     }
 
     /**
