@@ -18,6 +18,7 @@ public class LoadSave {
         try {
             sc = new Scanner(folderPath);
             folder = new File(sc.nextLine());
+            Controller.mainDirectory = folder;
             folders = folder.list(new FilenameFilter() {
                 @Override
                 public boolean accept(File dir, String name) {
@@ -27,9 +28,11 @@ public class LoadSave {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        sc.close();
     }
 
     public String[] getFolders() {
+
         return folders;
     }
 }

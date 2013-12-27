@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
 /**
@@ -31,6 +32,7 @@ import java.util.ResourceBundle;
  */
 
 public class Controller implements Initializable {
+    public static File mainDirectory;
     /**
      * RLA_GUI.fxml
      */
@@ -94,7 +96,10 @@ public class Controller implements Initializable {
         teamList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String s2) {
-                //LoadForTeam(s2);
+                LoadForTeam loadForTeam = new LoadForTeam(s2);
+                if (loadForTeam.getCompetitions() != null) {
+                    Collections.addAll(tableData, loadForTeam.getCompetitions());
+                }
             }
         });
 
@@ -179,9 +184,7 @@ public class Controller implements Initializable {
         LoadSave loadSave = new LoadSave(file);
         if (loadSave.getFolders() != null) {
             String[] futureTeams = loadSave.getFolders();
-            for (String team : futureTeams) {
-                teams.add(team);
-            }
+            Collections.addAll(teams, futureTeams);
         }
     }
 
