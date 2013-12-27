@@ -3,7 +3,6 @@
         <!--
             @author Octogonapus
         -->
-
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -34,6 +33,12 @@
             <MenuItem mnemonicParsing="false" onAction="#initDeleteCompetition" text="Delete Competition" />
           </items>
         </Menu>
+        <Menu mnemonicParsing="false" text="Analyze">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#initAnalyzeTeam" text="Team" />
+            <MenuItem mnemonicParsing="false" onAction="#initAnalyzeComp" text="Competition" />
+          </items>
+        </Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
             <MenuItem mnemonicParsing="false" text="About" />
@@ -41,23 +46,20 @@
         </Menu>
       </menus>
     </MenuBar>
-    <TableView layoutX="228.0" layoutY="74.0" opacity="1.0" prefHeight="862.0" prefWidth="1437.0" visible="true">
+    <TableView fx:id="mainTable" layoutX="228.0" layoutY="74.0" maxWidth="-1.0" minWidth="-1.0" opacity="1.0" prefHeight="862.0" prefWidth="1437.0" visible="true">
       <columns>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="436.0" text="Competition" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="88.0" text="Match #" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Red Alliance 1" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Red Alliance 2" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Red Alliance 3" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Blue Alliance 1" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Blue Alliance 2" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Blue Alliance 3" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Red Score" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Blue Score" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="436.0" text="Competition" fx:id="compColumn" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="88.0" text="Match #" fx:id="matchColumn" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Red Alliance 1" fx:id="redAlliance1Column" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Red Alliance 2" fx:id="redAlliance2Column" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Red Alliance 3" fx:id="redAlliance3Column" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Blue Alliance 1" fx:id="blueAlliance1Column" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Blue Alliance 2" fx:id="blueAlliance2Column" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Blue Alliance 3" fx:id="blueAlliance3Column" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Red Score" fx:id="redScoreColumn" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Blue Score" fx:id="blueScoreColumn" />
       </columns>
     </TableView>
-    <ChoiceBox fx:id="competitionChooser" layoutX="228.0" layoutY="45.0" prefHeight="22.0" prefWidth="436.0">
-      <items>
-      </items>
-    </ChoiceBox>
+    <ChoiceBox fx:id="competitionChooser" layoutX="228.0" layoutY="45.0" prefHeight="22.0" prefWidth="436.0" />
   </children>
 </AnchorPane>

@@ -1,21 +1,20 @@
 package Robotics2442C;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -41,10 +40,35 @@ public class Controller implements Initializable {
     @FXML
     private TextField searchField;
     @FXML
-    private MenuBar menuBar;
-    @FXML
     private final ChoiceBox<String> competitionChooser = new ChoiceBox<String>();
     private static final ObservableList<String> competitions = FXCollections.observableArrayList();
+    private int currentCompSelection;
+    @FXML
+    private final TableView<Competition> mainTable = new TableView<Competition>();
+    private static final ObservableList<Competition> tableData = FXCollections.observableArrayList();
+        /**
+         * TableView
+         */
+        @FXML
+        private TableColumn<Competition, String> compColumn;
+        @FXML
+        private TableColumn<Competition, String> matchColumn;
+        @FXML
+        private TableColumn<Competition, String> redAlliance1Column;
+        @FXML
+        private TableColumn<Competition, String> redAlliance2Column;
+        @FXML
+        private TableColumn<Competition, String> redAlliance3Column;
+        @FXML
+        private TableColumn<Competition, String> blueAlliance1Column;
+        @FXML
+        private TableColumn<Competition, String> blueAlliance2Column;
+        @FXML
+        private TableColumn<Competition, String> blueAlliance3Column;
+        @FXML
+        private TableColumn<Competition, String> redScoreColumn;
+        @FXML
+        private TableColumn<Competition, String> blueScoreColumn;
 
     /**
      * RLA_NewTeamDialog.fxml
@@ -67,10 +91,38 @@ public class Controller implements Initializable {
          * RLA_GUI.fxml
          */
         teamList.setItems(teams);
-        competitionChooser.setItems(competitions);
-    }
+        teamList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String s2) {
+                //LoadForTeam(s2);
+            }
+        });
 
-    //TODO: Use a system of folders and files to store team data
+        competitionChooser.setItems(competitions);
+        competitionChooser.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
+                currentCompSelection = number2.intValue();
+            }
+        });
+
+        mainTable.setEditable(true);
+        mainTable.setItems(tableData);
+
+            /**
+             * TableView
+             */
+            compColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("competitionName"));
+            matchColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("matchName"));
+            redAlliance1Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("redAlliance1"));
+            redAlliance2Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("redAlliance2"));
+            redAlliance3Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("redAlliance3"));
+            blueAlliance1Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueAlliance1"));
+            blueAlliance2Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueAlliance2"));
+            blueAlliance3Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueAlliance3"));
+            redScoreColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("redScore"));
+            blueScoreColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueScore"));
+    }
 
     public void initNewTeam(ActionEvent actionEvent) throws Exception {
         Parent root = load("RLA_NewTeamDialog.fxml");
@@ -102,11 +154,35 @@ public class Controller implements Initializable {
     }
 
     public void deleteConfirm(ActionEvent actionEvent) {
-        competitions.remove();
+        try {
+            competitions.remove(currentCompSelection);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            //TODO: Implement user friendly error report
+            e.printStackTrace();
+        }
+    }
+
+    //TODO: Implement initAnalyzeTeam
+    public void initAnalyzeTeam(ActionEvent actionEvent) {}
+
+    public void initAnalyzeComp(ActionEvent actionEvent) {
+        //
     }
 
     public void openApp(ActionEvent actionEvent) {
-        //TODO: Implement open function
+        Stage stage = new Stage();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        fileChooser.setInitialDirectory(new File((System.getProperty("user.home"))));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("txt", "*.txt"));
+        File file = fileChooser.showOpenDialog(stage);
+        LoadSave loadSave = new LoadSave(file);
+        if (loadSave.getFolders() != null) {
+            String[] futureTeams = loadSave.getFolders();
+            for (String team : futureTeams) {
+                teams.add(team);
+            }
+        }
     }
 
     public void saveApp(ActionEvent actionEvent) {
