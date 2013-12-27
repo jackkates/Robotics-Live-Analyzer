@@ -48,29 +48,29 @@ public class Controller implements Initializable {
     @FXML
     private final TableView<Competition> mainTable = new TableView<Competition>();
     private static final ObservableList<Competition> tableData = FXCollections.observableArrayList();
-        /**
-         * TableView
-         */
-        @FXML
-        private TableColumn<Competition, String> compColumn;
-        @FXML
-        private TableColumn<Competition, String> matchColumn;
-        @FXML
-        private TableColumn<Competition, String> redAlliance1Column;
-        @FXML
-        private TableColumn<Competition, String> redAlliance2Column;
-        @FXML
-        private TableColumn<Competition, String> redAlliance3Column;
-        @FXML
-        private TableColumn<Competition, String> blueAlliance1Column;
-        @FXML
-        private TableColumn<Competition, String> blueAlliance2Column;
-        @FXML
-        private TableColumn<Competition, String> blueAlliance3Column;
-        @FXML
-        private TableColumn<Competition, String> redScoreColumn;
-        @FXML
-        private TableColumn<Competition, String> blueScoreColumn;
+    /**
+     * TableView
+     */
+    @FXML
+    private TableColumn<Competition, String> compColumn;
+    @FXML
+    private TableColumn<Competition, String> matchColumn;
+    @FXML
+    private TableColumn<Competition, String> redAlliance1Column;
+    @FXML
+    private TableColumn<Competition, String> redAlliance2Column;
+    @FXML
+    private TableColumn<Competition, String> redAlliance3Column;
+    @FXML
+    private TableColumn<Competition, String> blueAlliance1Column;
+    @FXML
+    private TableColumn<Competition, String> blueAlliance2Column;
+    @FXML
+    private TableColumn<Competition, String> blueAlliance3Column;
+    @FXML
+    private TableColumn<Competition, String> redScoreColumn;
+    @FXML
+    private TableColumn<Competition, String> blueScoreColumn;
 
     /**
      * RLA_NewTeamDialog.fxml
@@ -114,20 +114,20 @@ public class Controller implements Initializable {
         mainTable.setEditable(true);
         mainTable.setItems(tableData);
 
-            /**
-             * TableView
-             */
-            compColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("competitionName"));
-            matchColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("matchName"));
-            redAlliance1Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("redAlliance1"));
-            redAlliance2Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("redAlliance2"));
-            redAlliance3Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("redAlliance3"));
-            blueAlliance1Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueAlliance1"));
-            blueAlliance2Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueAlliance2"));
-            blueAlliance3Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueAlliance3"));
-            redScoreColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("redScore"));
-            blueScoreColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueScore"));
-    }
+        /**
+         * TableView
+         */
+        compColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("competitionName"));
+        matchColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("matchName"));
+        redAlliance1Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("redAlliance1"));
+        redAlliance2Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("redAlliance2"));
+        redAlliance3Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("redAlliance3"));
+        blueAlliance1Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueAlliance1"));
+        blueAlliance2Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueAlliance2"));
+        blueAlliance3Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueAlliance3"));
+        redScoreColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("redScore"));
+        blueScoreColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueScore"));
+}
 
     public void initNewTeam(ActionEvent actionEvent) throws Exception {
         Parent root = load("RLA_NewTeamDialog.fxml");

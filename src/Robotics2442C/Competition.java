@@ -7,28 +7,32 @@ import javafx.beans.property.SimpleStringProperty;
  */
 
 public class Competition {
-    private final SimpleStringProperty competitionName;
-    private final SimpleStringProperty matchName;
-    private final SimpleStringProperty redAlliance1;
-    private final SimpleStringProperty redAlliance2;
-    private final SimpleStringProperty redAlliance3;
-    private final SimpleStringProperty blueAlliance1;
-    private final SimpleStringProperty blueAlliance2;
-    private final SimpleStringProperty blueAlliance3;
-    private final SimpleStringProperty redScore;
-    private final SimpleStringProperty blueScore;
+    private final SimpleStringProperty competitionName = new SimpleStringProperty();
+    private final SimpleStringProperty matchName = new SimpleStringProperty();
+    private final SimpleStringProperty redAlliance1 = new SimpleStringProperty();
+    private final SimpleStringProperty redAlliance2 = new SimpleStringProperty();
+    private final SimpleStringProperty redAlliance3 = new SimpleStringProperty();
+    private final SimpleStringProperty blueAlliance1 = new SimpleStringProperty();
+    private final SimpleStringProperty blueAlliance2 = new SimpleStringProperty();
+    private final SimpleStringProperty blueAlliance3 = new SimpleStringProperty();
+    private final SimpleStringProperty redScore = new SimpleStringProperty();
+    private final SimpleStringProperty blueScore = new SimpleStringProperty();
+
+    public Competition() {
+
+    }
 
     public Competition(String competitionName, String matchName, String redAlliance1, String redAlliance2, String redAlliance3, String blueAlliance1, String blueAlliance2, String blueAlliance3, String redScore, String blueScore) {
-        this.competitionName = new SimpleStringProperty(competitionName);
-        this.matchName = new SimpleStringProperty(matchName);
-        this.redAlliance1 = new SimpleStringProperty(redAlliance1);
-        this.redAlliance2 = new SimpleStringProperty(redAlliance2);
-        this.redAlliance3 = new SimpleStringProperty(redAlliance3);
-        this.blueAlliance1 = new SimpleStringProperty(blueAlliance1);
-        this.blueAlliance2 = new SimpleStringProperty(blueAlliance2);
-        this.blueAlliance3 = new SimpleStringProperty(blueAlliance3);
-        this.redScore = new SimpleStringProperty(redScore);
-        this.blueScore = new SimpleStringProperty(blueScore);
+        this.competitionName.set(competitionName);
+        this.matchName.set(matchName);
+        this.redAlliance1.set(redAlliance1);
+        this.redAlliance2.set(redAlliance2);
+        this.redAlliance3.set(redAlliance3);
+        this.blueAlliance1.set(blueAlliance1);
+        this.blueAlliance2.set(blueAlliance2);
+        this.blueAlliance3.set(blueAlliance3);
+        this.redScore.set(redScore);
+        this.blueScore.set(blueScore);
     }
 
     public String getCompetitionName() {
