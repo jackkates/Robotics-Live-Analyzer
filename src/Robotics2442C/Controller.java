@@ -33,6 +33,7 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     public static File mainDirectory;
+    private Main mainApp;
     /**
      * RLA_GUI.fxml
      */
@@ -72,18 +73,6 @@ public class Controller implements Initializable {
     @FXML
     private TableColumn<Competition, String> blueScoreColumn;
 
-    /**
-     * RLA_NewTeamDialog.fxml
-     */
-    @FXML
-    private TextField newTeamField;
-
-    /**
-     * RLA_NewCompDialog.fxml
-     */
-    @FXML
-    private TextField newCompField;
-
     public Controller() {
     }
 
@@ -97,7 +86,7 @@ public class Controller implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String s2) {
                 LoadForTeam loadForTeam = new LoadForTeam(s2);
-                if (loadForTeam.getCompetitions() != null) {
+                if(loadForTeam.getCompetitions() != null) {
                     Collections.addAll(tableData, loadForTeam.getCompetitions());
                 }
             }
@@ -127,35 +116,33 @@ public class Controller implements Initializable {
         blueAlliance3Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueAlliance3"));
         redScoreColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("redScore"));
         blueScoreColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueScore"));
-}
-
-    public void initNewTeam(ActionEvent actionEvent) throws Exception {
-        Parent root = load("RLA_NewTeamDialog.fxml");
-        Dialog.show("New Team", root, 353, 259);
     }
 
-    public void newTeam(ActionEvent actionEvent) {
-        teams.add(newTeamField.getText());
+    @FXML
+    public void initNewTeam(ActionEvent actionEvent) throws Exception {
+        String teamName = Dialogs.showNewTeamDialog();
+        if (teamName != null) {
+            teams.add(teamName);
+        }
     }
 
     public void deleteTeam(ActionEvent actionEvent) {
-        if (teamList.getSelectionModel().getSelectedItem() != null) {
+        if(teamList.getSelectionModel().getSelectedItem() != null) {
             teams.remove(teamList.getSelectionModel().getSelectedItem());
         }
     }
 
     public void initNewCompetition(ActionEvent actionEvent) throws Exception {
-        Parent root = load("RLA_NewCompDialog.fxml");
-        Dialog.show("New Competition", root, 353, 239);
-    }
-
-    public void newCompetition(ActionEvent actionEvent) {
-        competitions.add(newCompField.getText());
+        String competitionName = Dialogs.showNewCompetitionDialog();
+        //If a competition name was returned, add it to the list
+        if (competitionName != null) {
+            competitions.add(competitionName);
+        }
     }
 
     public void initDeleteCompetition(ActionEvent actionEvent) throws Exception {
         Parent root = load("RLA_CompDeleteWarning.fxml");
-        Dialog.show("Really Delete Competition?", root, 353, 239);
+
     }
 
     public void deleteConfirm(ActionEvent actionEvent) {
@@ -168,7 +155,8 @@ public class Controller implements Initializable {
     }
 
     //TODO: Implement initAnalyzeTeam
-    public void initAnalyzeTeam(ActionEvent actionEvent) {}
+    public void initAnalyzeTeam(ActionEvent actionEvent) {
+    }
 
     public void initAnalyzeComp(ActionEvent actionEvent) {
         //
@@ -182,7 +170,7 @@ public class Controller implements Initializable {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("txt", "*.txt"));
         File file = fileChooser.showOpenDialog(stage);
         LoadSave loadSave = new LoadSave(file);
-        if (loadSave.getFolders() != null) {
+        if(loadSave.getFolders() != null) {
             String[] futureTeams = loadSave.getFolders();
             Collections.addAll(teams, futureTeams);
         }
@@ -205,5 +193,9 @@ public class Controller implements Initializable {
      */
     private Parent load(String name) throws IOException {
         return FXMLLoader.load(getClass().getResource(name));
+    }
+
+    public void setMainApp(Main main) {
+        this.mainApp = main;
     }
 }
