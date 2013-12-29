@@ -21,12 +21,6 @@ import java.util.Collections;
 import java.util.ResourceBundle;
 
 /**
- * TODO: Remove ChoiceBox and use something with the MenuBar to edit specific competitions, one at a time.
- * TODO: The TableView will adapt properly to show data to do only with the selected competition.
- * TODO: When not editing a competition, the TableView will show all competitions.
- */
-
-/**
  * @author Octogonapus
  * @contributor jackkates
  */
@@ -86,7 +80,7 @@ public class Controller implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String s2) {
                 LoadForTeam loadForTeam = new LoadForTeam(s2);
-                if(loadForTeam.getCompetitions() != null) {
+                if (loadForTeam.getCompetitions() != null) {
                     Collections.addAll(tableData, loadForTeam.getCompetitions());
                 }
             }
@@ -127,7 +121,7 @@ public class Controller implements Initializable {
     }
 
     public void deleteTeam(ActionEvent actionEvent) {
-        if(teamList.getSelectionModel().getSelectedItem() != null) {
+        if (teamList.getSelectionModel().getSelectedItem() != null) {
             teams.remove(teamList.getSelectionModel().getSelectedItem());
         }
     }
@@ -140,17 +134,16 @@ public class Controller implements Initializable {
         }
     }
 
-    public void initDeleteCompetition(ActionEvent actionEvent) throws Exception {
-        Parent root = load("RLA_CompDeleteWarning.fxml");
-
-    }
-
-    public void deleteConfirm(ActionEvent actionEvent) {
-        try {
-            competitions.remove(currentCompSelection);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            //TODO: Implement user friendly error report
-            e.printStackTrace();
+    public void deleteCompetition(ActionEvent actionEvent) throws Exception {
+        boolean doDelete = Dialogs.showDeleteCompetitionDialog();
+        //If doDelete returns true, delete the currently selected competition
+        if (doDelete) {
+            try {
+                competitions.remove(currentCompSelection);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                //TODO: Implement user friendly error report
+                e.printStackTrace();
+            }
         }
     }
 

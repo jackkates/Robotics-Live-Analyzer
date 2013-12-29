@@ -30,7 +30,7 @@
             <MenuItem mnemonicParsing="false" onAction="#initNewTeam" text="New Team" />
             <MenuItem mnemonicParsing="false" onAction="#deleteTeam" text="Delete Team" />
             <MenuItem mnemonicParsing="false" onAction="#initNewCompetition" text="New Competition" />
-            <MenuItem mnemonicParsing="false" onAction="#initDeleteCompetition" text="Delete Competition" />
+            <MenuItem mnemonicParsing="false" onAction="#deleteCompetition" text="Delete Competition" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Analyze">

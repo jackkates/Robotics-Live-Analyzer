@@ -11,7 +11,7 @@
   <children>
     <ScrollPane id="ScrollPane" layoutX="14.0" layoutY="74.0" prefHeight="862.0" prefViewportHeight="873.0" prefViewportWidth="205.0">
       <content>
-        <ListView fx:id="teamList" onEditCommit="#newTeam" prefHeight="860.0" prefWidth="205.0" />
+        <ListView fx:id="teamList" prefHeight="860.0" prefWidth="205.0" />
       </content>
     </ScrollPane>
     <TextField fx:id="searchField" layoutX="14.0" layoutY="45.0" prefWidth="207.0" />
@@ -30,7 +30,7 @@
             <MenuItem mnemonicParsing="false" onAction="#initNewTeam" text="New Team" />
             <MenuItem mnemonicParsing="false" onAction="#deleteTeam" text="Delete Team" />
             <MenuItem mnemonicParsing="false" onAction="#initNewCompetition" text="New Competition" />
-            <MenuItem mnemonicParsing="false" onAction="#initDeleteCompetition" text="Delete Competition" />
+            <MenuItem mnemonicParsing="false" onAction="#deleteCompetition" text="Delete Competition" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Analyze">

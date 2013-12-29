@@ -9,10 +9,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="239.0" prefWidth="353.21142578125" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Robotics2442C.Controller">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="239.0" prefWidth="353.21142578125" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Robotics2442C.DeleteCompetitionDialogController">
   <children>
     <HBox id="HBox" alignment="CENTER" layoutX="123.0" layoutY="120.0" spacing="15.0" />
     <Text layoutX="22.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Are you sure you want to delete the competition?" />
-    <Button layoutX="153.0" layoutY="120.0" mnemonicParsing="false" onAction="#deleteConfirm" text="Yes!" />
+    <Button layoutX="153.0" layoutY="120.0" mnemonicParsing="false" onAction="#deleteCompetitionButtonPressed" text="Yes!" />
   </children>
 </AnchorPane>

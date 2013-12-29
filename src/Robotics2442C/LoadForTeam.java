@@ -23,34 +23,36 @@ public class LoadForTeam {
                 return pathname.isDirectory();
             }
         });
-        competitions = new Competition[teamComps.length];
-        for (File teamComp : teamComps) {
-            teamMatches = teamComp.listFiles(new FileFilter() {
-                @Override
-                public boolean accept(File pathname) {
-                    return pathname.isFile();
+        if (teamComps != null && teamComps.length != 0) {
+            competitions = new Competition[teamComps.length];
+            for (File teamComp : teamComps) {
+                teamMatches = teamComp.listFiles(new FileFilter() {
+                    @Override
+                    public boolean accept(File pathname) {
+                        return pathname.isFile();
+                    }
+                });
+                for (File teamMatch : teamMatches) {
+                    try {
+                        sc = new Scanner(teamMatch);
+                        sc.useDelimiter(",");
+                        competitions[i] = new Competition();
+                        competitions[i].setCompetitionName(sc.next());
+                        competitions[i].setMatchName(sc.next());
+                        competitions[i].setRedAlliance1(sc.next());
+                        competitions[i].setRedAlliance2(sc.next());
+                        competitions[i].setRedAlliance3(sc.next());
+                        competitions[i].setBlueAlliance1(sc.next());
+                        competitions[i].setBlueAlliance2(sc.next());
+                        competitions[i].setBlueAlliance3(sc.next());
+                        competitions[i].setRedScore(sc.next());
+                        competitions[i].setBlueScore(sc.next());
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
-            });
-            for (File teamMatch : teamMatches) {
-                try {
-                    sc = new Scanner(teamMatch);
-                    sc.useDelimiter(",");
-                    competitions[i] = new Competition();
-                    competitions[i].setCompetitionName(sc.next());
-                    competitions[i].setMatchName(sc.next());
-                    competitions[i].setRedAlliance1(sc.next());
-                    competitions[i].setRedAlliance2(sc.next());
-                    competitions[i].setRedAlliance3(sc.next());
-                    competitions[i].setBlueAlliance1(sc.next());
-                    competitions[i].setBlueAlliance2(sc.next());
-                    competitions[i].setBlueAlliance3(sc.next());
-                    competitions[i].setRedScore(sc.next());
-                    competitions[i].setBlueScore(sc.next());
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                i++;
             }
-            i++;
         }
     }
 

@@ -11,8 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Creator: jackkates
- * Date: 12/27/13
+ * @author jackkates
  */
 public class NewCompetitionDialogController implements Initializable {
 

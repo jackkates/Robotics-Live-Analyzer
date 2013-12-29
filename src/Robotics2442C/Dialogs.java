@@ -9,8 +9,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Creator: jackkates
- * Date: 12/27/13
+ * @author jackkates
+ * @contributor Octogonapus
  */
 public class Dialogs {
 
@@ -38,7 +38,7 @@ public class Dialogs {
         stage.setTitle("New Competition");
         stage.initModality(Modality.WINDOW_MODAL);
 
-        Scene scene =  new Scene(page);
+        Scene scene = new Scene(page);
         stage.setScene(scene);
 
         NewCompetitionDialogController controller = loader.getController();
@@ -46,5 +46,22 @@ public class Dialogs {
         stage.showAndWait();
 
         return controller.getCompetitionName();
+    }
+
+    public static boolean showDeleteCompetitionDialog() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("RLA_CompDeleteWarning.fxml"));
+        Parent page = (Parent) loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Really Delete Competition?");
+        stage.initModality(Modality.WINDOW_MODAL);
+
+        Scene scene = new Scene(page);
+        stage.setScene(scene);
+
+        DeleteCompetitionDialogController controller = loader.getController();
+
+        stage.showAndWait();
+
+        return controller.getPressState();
     }
 }
