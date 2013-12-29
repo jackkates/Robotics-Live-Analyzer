@@ -35,6 +35,7 @@ public class LoadForTeam {
                 try {
                     sc = new Scanner(teamMatch);
                     sc.useDelimiter(",");
+                    competitions[i] = new Competition();
                     competitions[i].setCompetitionName(sc.next());
                     competitions[i].setMatchName(sc.next());
                     competitions[i].setRedAlliance1(sc.next());

@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="239.0" prefWidth="353.21142578125" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Robotics2442C.Controller">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="239.0" prefWidth="353.21142578125" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Robotics2442C.NewTeamDialogController">
   <children>
     <TextField fx:id="newTeamField" layoutX="77.0" layoutY="109.0" prefWidth="200.0" />
-    <Button id="addTeamButton" layoutX="126.0" layoutY="138.0" mnemonicParsing="false" onAction="#newTeam" text="Create Team" />
+    <Button fx:id="addTeamButton" layoutX="126.0" layoutY="138.0" mnemonicParsing="false" onAction="#addTeamButtonPressed" text="Create Team" />
     <Text layoutX="109.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter the team name:" />
   </children>
 </AnchorPane>
