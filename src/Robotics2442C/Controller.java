@@ -35,6 +35,7 @@ public class Controller implements Initializable {
     @FXML
     private final ListView<String> teamList = new ListView<String>();
     private static final ObservableList<String> teams = FXCollections.observableArrayList();
+    private String currentTeamSelection;
     @FXML
     private TextField searchField;
     @FXML
@@ -80,6 +81,7 @@ public class Controller implements Initializable {
         teamList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String s2) {
+                currentTeamSelection = s2;
                 LoadForTeam loadForTeam = new LoadForTeam(s2);
                 if (loadForTeam.getCompetitions() != null) {
                     tableData.clear();
@@ -114,6 +116,7 @@ public class Controller implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent<Competition, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setMatchName(t.getNewValue());
+                SaveTools.save(currentTeamSelection, tableData.get(tableData.indexOf(t.getTableView().getItems().get(t.getTablePosition().getRow()).getCompetitionName())));
             }
         });
         redAlliance1Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("redAlliance1"));
@@ -189,18 +192,9 @@ public class Controller implements Initializable {
         DirectoryTools.makeDirectory(startingPath, "", false);
         //Create data directory
         DirectoryTools.makeDirectory(startingPath, System.getProperty("file.separator") + "Data", true);
-        //Create file holding file path of data directory and write the file path to said file
-        Writer writer = null;
-        try {
-            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(startingPath + System.getProperty("file.separator") + "openMe.txt")));
-            writer.write(startingPath + System.getProperty("file.separator") + "Data");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                writer.close();
-            } catch (Exception ignored) { }
-        }
+        //Create CFE file
+        File CFE_File = new File(startingPath + System.getProperty("file.separator") + "openMe.cfe");
+        CFE_File.createNewFile();
         Controller.mainDirectory = new File(startingPath + System.getProperty("file.separator") + "Data");
     }
 
@@ -208,6 +202,14 @@ public class Controller implements Initializable {
         String teamName = Dialogs.showNewTeamDialog();
         if (teamName != null && !teams.contains(teamName)) {
             teams.add(teamName);
+            PrintWriter writer = new PrintWriter(System.getProperty("user.home") + System.getProperty("file.separator") + "Robotics Live Analyzer" + System.getProperty("file.separator") + "openMe.cfe");
+            for (String team : teams) {
+                writer.write(team);
+                if (teams.indexOf(team) != teams.size() - 1) {
+                    writer.write(",");
+                }
+            }
+            writer.close();
             DirectoryTools.makeDirectory(mainDirectory.toString(), teamName, true);
         }
     }
@@ -244,13 +246,14 @@ public class Controller implements Initializable {
 
     public void newMatch(ActionEvent actionEvent) throws Exception {
         tableData.add(new Competition());
-        //NewMatchDataFile newMatchDataFile = new NewMatchDataFile(competitions.get(currentCompSelection));
     }
 
     //TODO: Implement initAnalyzeTeam
     public void initAnalyzeTeam(ActionEvent actionEvent) {
+        //
     }
 
+    //TODO: Implement initAnalyzeComp
     public void initAnalyzeComp(ActionEvent actionEvent) {
         //
     }
@@ -260,13 +263,15 @@ public class Controller implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
         fileChooser.setInitialDirectory(new File((System.getProperty("user.home"))));
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("txt", "*.txt"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("cfe", "*.cfe"));
         File file = fileChooser.showOpenDialog(stage);
-        LoadSave loadSave = new LoadSave(file);
-        if(loadSave.getFolders() != null) {
-            String[] futureTeams = loadSave.getFolders();
-            Collections.addAll(teams, futureTeams);
-        }
+        CFE_Handler handler = new CFE_Handler();
+        teams.setAll(handler.parseFile(file));
+        //LoadSave loadSave = new LoadSave(file);
+        //if(loadSave.getFolders() != null) {
+        //     String[] futureTeams = loadSave.getFolders();
+        //    Collections.addAll(teams, futureTeams);
+        //}
     }
 
     public void closeApp(ActionEvent actionEvent) {
