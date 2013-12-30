@@ -144,6 +144,7 @@ public class Controller implements Initializable {
                 writer.close();
             } catch (Exception ignored) { }
         }
+        Controller.mainDirectory = new File(startingPath + System.getProperty("file.separator") + "Data");
     }
 
     public void initNewTeam(ActionEvent actionEvent) throws Exception {
@@ -166,6 +167,10 @@ public class Controller implements Initializable {
         //If a competition name was returned, add it to the list
         if (competitionName != null) {
             competitions.add(competitionName);
+            if (!DirectotryContains.searchDirectory(new File(mainDirectory + System.getProperty("file.separator") + teamList.getSelectionModel().getSelectedItem()), competitionName)) {
+                NewDirectory forCompetition = new NewDirectory(mainDirectory + System.getProperty("file.separator") + teamList.getSelectionModel().getSelectedItem(), competitionName);
+                forCompetition.makeDirectory(true);
+            }
         }
     }
 
