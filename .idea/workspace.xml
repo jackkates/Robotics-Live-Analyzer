@@ -67,7 +67,7 @@
       <file leaf-file-name="Controller.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Robotics2442C/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="134" column="94" selection-start="6196" selection-end="6196" vertical-scroll-proportion="0.2840512" vertical-offset="1451" max-vertical-offset="3180">
+            <state line="204" column="5" selection-start="8916" selection-end="8916" vertical-scroll-proportion="0.6332945" vertical-offset="2201" max-vertical-offset="3060">
               <folding>
                 <element signature="e#2533#2939#0" expanded="true" />
                 <element signature="e#2928#2929#0" expanded="true" />
@@ -111,7 +111,6 @@
         <option value="$PROJECT_DIR$/src/Robotics2442C/DeleteCompetitionDialogController.java" />
         <option value="$PROJECT_DIR$/src/Robotics2442C/Dialogs.java" />
         <option value="$PROJECT_DIR$/src/Robotics2442C/Competition.java" />
-        <option value="$PROJECT_DIR$/src/Robotics2442C/RLA_GUI.fxml" />
         <option value="$PROJECT_DIR$/src/Robotics2442C/RLA_CompDeleteWarning.fxml" />
         <option value="$PROJECT_DIR$/src/Robotics2442C/RLA_NewCompDialog.fxml" />
         <option value="$PROJECT_DIR$/src/Robotics2442C/RLA_NewTeamDialog.fxml" />
@@ -119,6 +118,7 @@
         <option value="$PROJECT_DIR$/src/Robotics2442C/NewDirectory.java" />
         <option value="$PROJECT_DIR$/src/Robotics2442C/NewFile.java" />
         <option value="$PROJECT_DIR$/src/Robotics2442C/Controller.java" />
+        <option value="$PROJECT_DIR$/src/Robotics2442C/RLA_GUI.fxml" />
       </list>
     </option>
   </component>
@@ -708,20 +708,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Robotics2442C/Save.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="22" selection-start="50" selection-end="50" vertical-scroll-proportion="0.052386496" vertical-offset="0" max-vertical-offset="859">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Robotics2442C/SaveAs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="22" selection-start="50" selection-end="50" vertical-scroll-proportion="0.052386496" vertical-offset="0" max-vertical-offset="859">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Robotics2442C/RLA_CompDeleteWarning.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="28" selection-start="68" selection-end="68" vertical-scroll-proportion="0.035460994" vertical-offset="0" max-vertical-offset="846">
@@ -739,13 +725,6 @@
     <entry file="file://$PROJECT_DIR$/src/Robotics2442C/RLA_NewTeamDialog.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="28" selection-start="68" selection-end="68" vertical-scroll-proportion="0.035460994" vertical-offset="0" max-vertical-offset="846">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Robotics2442C/RLA_GUI.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="8" selection-start="77" selection-end="77" vertical-scroll-proportion="0.05319149" vertical-offset="0" max-vertical-offset="1080">
           <folding />
         </state>
       </provider>
@@ -780,9 +759,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Robotics2442C/RLA_GUI.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="80" selection-start="1238" selection-end="1238" vertical-scroll-proportion="0.39007092" vertical-offset="0" max-vertical-offset="1050">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Robotics2442C/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="134" column="94" selection-start="6196" selection-end="6196" vertical-scroll-proportion="0.2840512" vertical-offset="1451" max-vertical-offset="3180">
+        <state line="204" column="5" selection-start="8916" selection-end="8916" vertical-scroll-proportion="0.6332945" vertical-offset="2201" max-vertical-offset="3060">
           <folding>
             <element signature="e#2533#2939#0" expanded="true" />
             <element signature="e#2928#2929#0" expanded="true" />

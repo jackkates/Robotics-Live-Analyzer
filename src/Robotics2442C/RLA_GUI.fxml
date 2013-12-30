@@ -21,8 +21,6 @@
             <MenuItem mnemonicParsing="false" onAction="#setupApp" text="Setup" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" onAction="#openApp" text="Open" />
-            <MenuItem mnemonicParsing="false" onAction="#saveApp" text="Save" />
-            <MenuItem mnemonicParsing="false" onAction="#saveAsApp" text="Save As" />
             <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Close" />
           </items>
         </Menu>

@@ -204,14 +204,6 @@ public class Controller implements Initializable {
         }
     }
 
-    public void saveApp(ActionEvent actionEvent) {
-        //TODO: Implement save function
-    }
-
-    public void saveAsApp(ActionEvent actionEvent) {
-        //TODO: Implement save as function
-    }
-
     public void closeApp(ActionEvent actionEvent) {
         System.exit(0);
     }
