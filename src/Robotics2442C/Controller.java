@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.ResourceBundle;
 
@@ -81,7 +82,12 @@ public class Controller implements Initializable {
             public void changed(ObservableValue<? extends String> observableValue, String s, String s2) {
                 LoadForTeam loadForTeam = new LoadForTeam(s2);
                 if (loadForTeam.getCompetitions() != null) {
+                    tableData.clear();
                     Collections.addAll(tableData, loadForTeam.getCompetitions());
+                    competitions.clear();
+                    for (File competition : DirectoryTools.printDirectory(mainDirectory.toString() + System.getProperty("file.separator") + s2)) {
+                        competitions.add(competition.getName());
+                    }
                 }
             }
         });
@@ -127,11 +133,9 @@ public class Controller implements Initializable {
         //Path of main directory for the application's data to be held in
         String startingPath = System.getProperty("user.home") + System.getProperty("file.separator") + "Robotics Live Analyzer";
         //Create said main directory
-        NewDirectory mainDirectory = new NewDirectory(startingPath, "");
-        mainDirectory.makeDirectory(false);
+        DirectoryTools.makeDirectory(startingPath, "", false);
         //Create data directory
-        mainDirectory = new NewDirectory(startingPath, System.getProperty("file.separator") + "Data");
-        mainDirectory.makeDirectory(true);
+        DirectoryTools.makeDirectory(startingPath, System.getProperty("file.separator") + "Data", true);
         //Create file holding file path of data directory and write the file path to said file
         Writer writer = null;
         try {
@@ -151,8 +155,7 @@ public class Controller implements Initializable {
         String teamName = Dialogs.showNewTeamDialog();
         if (teamName != null && !teams.contains(teamName)) {
             teams.add(teamName);
-            NewDirectory forTeam = new NewDirectory(mainDirectory.toString(), teamName);
-            forTeam.makeDirectory(true);
+            DirectoryTools.makeDirectory(mainDirectory.toString(), teamName, true);
         }
     }
 
@@ -167,9 +170,8 @@ public class Controller implements Initializable {
         //If a competition name was returned, add it to the list
         if (competitionName != null) {
             competitions.add(competitionName);
-            if (!DirectotryContains.searchDirectory(new File(mainDirectory + System.getProperty("file.separator") + teamList.getSelectionModel().getSelectedItem()), competitionName)) {
-                NewDirectory forCompetition = new NewDirectory(mainDirectory + System.getProperty("file.separator") + teamList.getSelectionModel().getSelectedItem(), competitionName);
-                forCompetition.makeDirectory(true);
+            if (!DirectoryTools.searchDirectory(new File(mainDirectory + System.getProperty("file.separator") + teamList.getSelectionModel().getSelectedItem()), competitionName)) {
+                DirectoryTools.makeDirectory(mainDirectory + System.getProperty("file.separator") + teamList.getSelectionModel().getSelectedItem(), competitionName, true);
             }
         }
     }

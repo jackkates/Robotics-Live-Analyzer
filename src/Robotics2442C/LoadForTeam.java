@@ -13,6 +13,7 @@ public class LoadForTeam {
     private static Scanner sc;
     private static File[] teamMatches;
     private Competition[] competitions;
+    private String[] competitionNames;
 
     public LoadForTeam(String teamToLoad) {
         int i = 0;
