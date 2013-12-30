@@ -83,12 +83,12 @@ public class Controller implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String s2) {
                 currentTeamSelection = s2;
-                LoadForTeam loadForTeam = new LoadForTeam(s2);
-                if (loadForTeam.getCompetitions() != null) {
+                CBE_Handler handler = new CBE_Handler();
+                if (handler.loadMatches(s2) != null) {
                     tableData.clear();
-                    Collections.addAll(tableData, loadForTeam.getCompetitions());
+                    tableData.setAll(handler.loadMatches(s2));
                     competitions.clear();
-                    for (File competition : DirectoryTools.printDirectory(mainDirectory.toString() + System.getProperty("file.separator") + s2)) {
+                    for (File competition : DirectoryTools.printDirectoryFiles(mainDirectory.toString() + System.getProperty("file.separator") + s2)) {
                         competitions.add(competition.getName());
                     }
                 }
@@ -267,7 +267,7 @@ public class Controller implements Initializable {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("cfe", "*.cfe"));
         File file = fileChooser.showOpenDialog(stage);
         CFE_Handler handler = new CFE_Handler();
-        teams.setAll(handler.parseFile(file));
+        teams.setAll(handler.loadFile(file));
     }
 
     public void closeApp(ActionEvent actionEvent) {

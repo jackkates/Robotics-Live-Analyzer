@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class CFE_Handler {
     private ObservableList<String> teams = FXCollections.observableArrayList();
 
-    public ObservableList<String> parseFile(File team) {
+    public ObservableList<String> loadFile(File team) {
         Scanner sc;
         try {
             sc = new Scanner(team);

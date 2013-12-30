@@ -33,10 +33,35 @@ public class DirectoryTools {
 
     public static File[] printDirectory(String directoryPath) {
         File directory = new File(directoryPath);
-        return directory.listFiles(new FileFilter() {
+        ArrayList<File> files = new ArrayList<File>(0);
+        Collections.addAll(files, directory.listFiles(new FileFilter() {
             @Override
             public boolean accept(File pathname) {
                 return pathname.isDirectory();
+            }
+        }));
+        if (files.contains(".DS_Store")) {
+            files.remove(".DS_Store");
+        }
+        File[] filesCaster = new File[1];
+        return files.toArray(filesCaster);
+    }
+
+    public static File[] printDirectoryFiles(File directory) {
+        return directory.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                return pathname.isFile();
+            }
+        });
+    }
+
+    public static File[] printDirectoryFiles(String directoryPath) {
+        File directory = new File(directoryPath);
+        return directory.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                return pathname.isFile();
             }
         });
     }
