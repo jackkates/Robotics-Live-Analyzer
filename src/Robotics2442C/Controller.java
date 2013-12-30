@@ -28,6 +28,7 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     public static File mainDirectory;
+    public static final String fileSeparator = System.getProperty("file.separator");
     private Main mainApp;
     /**
      * RLA_GUI.fxml
@@ -187,22 +188,22 @@ public class Controller implements Initializable {
 
     public void setupApp(ActionEvent actionEvent) throws Exception {
         //Path of main directory for the application's data to be held in
-        String startingPath = System.getProperty("user.home") + System.getProperty("file.separator") + "Robotics Live Analyzer";
+        String startingPath = System.getProperty("user.home") + fileSeparator + "Robotics Live Analyzer";
         //Create said main directory
         DirectoryTools.makeDirectory(startingPath, "", false);
         //Create data directory
-        DirectoryTools.makeDirectory(startingPath, System.getProperty("file.separator") + "Data", true);
+        DirectoryTools.makeDirectory(startingPath, fileSeparator + "Data", true);
         //Create CFE file
-        File CFE_File = new File(startingPath + System.getProperty("file.separator") + "openMe.cfe");
+        File CFE_File = new File(startingPath + fileSeparator + "openMe.cfe");
         CFE_File.createNewFile();
-        Controller.mainDirectory = new File(startingPath + System.getProperty("file.separator") + "Data");
+        setMainDirectory();
     }
 
     public void initNewTeam(ActionEvent actionEvent) throws Exception {
         String teamName = Dialogs.showNewTeamDialog();
         if (teamName != null && !teams.contains(teamName)) {
             teams.add(teamName);
-            PrintWriter writer = new PrintWriter(System.getProperty("user.home") + System.getProperty("file.separator") + "Robotics Live Analyzer" + System.getProperty("file.separator") + "openMe.cfe");
+            PrintWriter writer = new PrintWriter(System.getProperty("user.home") + fileSeparator + "Robotics Live Analyzer" + fileSeparator + "openMe.cfe");
             for (String team : teams) {
                 writer.write(team);
                 if (teams.indexOf(team) != teams.size() - 1) {
@@ -225,8 +226,8 @@ public class Controller implements Initializable {
         //If a competition name was returned, add it to the list
         if (competitionName != null) {
             competitions.add(competitionName);
-            if (!DirectoryTools.searchDirectory(new File(mainDirectory + System.getProperty("file.separator") + teamList.getSelectionModel().getSelectedItem()), competitionName)) {
-                DirectoryTools.makeDirectory(mainDirectory + System.getProperty("file.separator") + teamList.getSelectionModel().getSelectedItem(), competitionName, true);
+            if (!DirectoryTools.searchDirectory(new File(mainDirectory + fileSeparator + teamList.getSelectionModel().getSelectedItem()), competitionName)) {
+                DirectoryTools.makeDirectory(mainDirectory + fileSeparator + teamList.getSelectionModel().getSelectedItem(), competitionName, true);
             }
         }
     }
@@ -267,11 +268,6 @@ public class Controller implements Initializable {
         File file = fileChooser.showOpenDialog(stage);
         CFE_Handler handler = new CFE_Handler();
         teams.setAll(handler.parseFile(file));
-        //LoadSave loadSave = new LoadSave(file);
-        //if(loadSave.getFolders() != null) {
-        //     String[] futureTeams = loadSave.getFolders();
-        //    Collections.addAll(teams, futureTeams);
-        //}
     }
 
     public void closeApp(ActionEvent actionEvent) {
@@ -287,5 +283,9 @@ public class Controller implements Initializable {
 
     public void setMainApp(Main main) {
         this.mainApp = main;
+    }
+
+    public static void setMainDirectory() {
+        Controller.mainDirectory = new File(System.getProperty("user.home") + fileSeparator + "Robotics Live Analyzer" + fileSeparator + "Data");
     }
 }

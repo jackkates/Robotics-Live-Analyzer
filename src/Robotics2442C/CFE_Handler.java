@@ -1,5 +1,6 @@
 package Robotics2442C;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.File;
@@ -11,7 +12,7 @@ import java.util.Scanner;
  */
 
 public class CFE_Handler {
-    private ObservableList<String> teams;
+    private ObservableList<String> teams = FXCollections.observableArrayList();
 
     public ObservableList<String> parseFile(File team) {
         Scanner sc;
@@ -27,6 +28,7 @@ public class CFE_Handler {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        Controller.setMainDirectory();
         return teams;
     }
 }

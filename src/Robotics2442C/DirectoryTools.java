@@ -45,7 +45,7 @@ public class DirectoryTools {
         File directory;
         String path;
         if (addName) {
-            path = rawPath.concat(System.getProperty("file.separator") + name);
+            path = rawPath + Controller.fileSeparator + name;
         } else {
             path = rawPath;
         }
