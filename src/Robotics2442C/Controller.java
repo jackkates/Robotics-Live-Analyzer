@@ -5,6 +5,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,7 +18,6 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.ResourceBundle;
 
@@ -104,29 +104,82 @@ public class Controller implements Initializable {
         mainTable.setItems(tableData);
 
         /**
-         * TableView
+         * TableView Columns
          */
         compColumn.setEditable(false);
         compColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("competitionName"));
-        compColumn.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
         matchColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("matchName"));
         matchColumn.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
+        matchColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Competition, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Competition, String> t) {
+                t.getTableView().getItems().get(t.getTablePosition().getRow()).setMatchName(t.getNewValue());
+            }
+        });
         redAlliance1Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("redAlliance1"));
         redAlliance1Column.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
+        redAlliance1Column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Competition, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Competition, String> t) {
+                t.getTableView().getItems().get(t.getTablePosition().getRow()).setRedAlliance1(t.getNewValue());
+            }
+        });
         redAlliance2Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("redAlliance2"));
         redAlliance2Column.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
+        redAlliance2Column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Competition, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Competition, String> t) {
+                t.getTableView().getItems().get(t.getTablePosition().getRow()).setRedAlliance2(t.getNewValue());
+            }
+        });
         redAlliance3Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("redAlliance3"));
         redAlliance3Column.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
+        redAlliance3Column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Competition, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Competition, String> t) {
+                t.getTableView().getItems().get(t.getTablePosition().getRow()).setRedAlliance3(t.getNewValue());
+            }
+        });
         blueAlliance1Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueAlliance1"));
         blueAlliance1Column.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
+        blueAlliance1Column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Competition, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Competition, String> t) {
+                t.getTableView().getItems().get(t.getTablePosition().getRow()).setBlueAlliance1(t.getNewValue());
+            }
+        });
         blueAlliance2Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueAlliance2"));
         blueAlliance2Column.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
+        blueAlliance2Column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Competition, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Competition, String> t) {
+                t.getTableView().getItems().get(t.getTablePosition().getRow()).setBlueAlliance2(t.getNewValue());
+            }
+        });
         blueAlliance3Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueAlliance3"));
         blueAlliance3Column.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
+        blueAlliance3Column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Competition, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Competition, String> t) {
+                t.getTableView().getItems().get(t.getTablePosition().getRow()).setBlueAlliance3(t.getNewValue());
+            }
+        });
         redScoreColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("redScore"));
         redScoreColumn.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
+        redScoreColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Competition, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Competition, String> t) {
+                t.getTableView().getItems().get(t.getTablePosition().getRow()).setRedScore(t.getNewValue());
+            }
+        });
         blueScoreColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueScore"));
         blueScoreColumn.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
+        blueScoreColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Competition, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<Competition, String> t) {
+                t.getTableView().getItems().get(t.getTablePosition().getRow()).setBlueScore(t.getNewValue());
+            }
+        });
     }
 
     public void setupApp(ActionEvent actionEvent) throws Exception {
@@ -191,6 +244,7 @@ public class Controller implements Initializable {
 
     public void newMatch(ActionEvent actionEvent) throws Exception {
         tableData.add(new Competition());
+        //NewMatchDataFile newMatchDataFile = new NewMatchDataFile(competitions.get(currentCompSelection));
     }
 
     //TODO: Implement initAnalyzeTeam

@@ -19,9 +19,7 @@ public class Competition {
     private final SimpleStringProperty redScore = new SimpleStringProperty();
     private final SimpleStringProperty blueScore = new SimpleStringProperty();
 
-    public Competition() {
-
-    }
+    public Competition() { }
 
     public Competition(String competitionName, String matchName, String redAlliance1, String redAlliance2, String redAlliance3, String blueAlliance1, String blueAlliance2, String blueAlliance3, String redScore, String blueScore) {
         this.competitionName.set(competitionName);
