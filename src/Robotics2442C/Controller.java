@@ -189,6 +189,10 @@ public class Controller implements Initializable {
         }
     }
 
+    public void newMatch(ActionEvent actionEvent) throws Exception {
+        tableData.add(new Competition());
+    }
+
     //TODO: Implement initAnalyzeTeam
     public void initAnalyzeTeam(ActionEvent actionEvent) {
     }
