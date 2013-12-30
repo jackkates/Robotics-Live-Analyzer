@@ -16,7 +16,7 @@ public class LoadForTeam {
 
     public LoadForTeam(String teamToLoad) {
         int i = 0;
-        File teamFolder = new File(Controller.mainDirectory.toString().concat("/" + teamToLoad));
+        File teamFolder = new File(Controller.mainDirectory.toString().concat(System.getProperty("file.separator") + teamToLoad));
         teamComps = teamFolder.listFiles(new FileFilter() {
             @Override
             public boolean accept(File pathname) {

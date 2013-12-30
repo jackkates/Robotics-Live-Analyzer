@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 /**
  * @author Octogonapus
+ * @contributor jackkates
  */
 
 public class Competition {

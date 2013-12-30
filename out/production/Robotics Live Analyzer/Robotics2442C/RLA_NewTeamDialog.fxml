@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-        <!--
-            @author Octogonapus
-        -->
+<!-- @author Octogonapus -->
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>

@@ -11,11 +11,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.Collections;
 import java.util.ResourceBundle;
@@ -100,23 +100,58 @@ public class Controller implements Initializable {
         /**
          * TableView
          */
+        compColumn.setEditable(false);
         compColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("competitionName"));
+        compColumn.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
         matchColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("matchName"));
+        matchColumn.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
         redAlliance1Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("redAlliance1"));
+        redAlliance1Column.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
         redAlliance2Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("redAlliance2"));
+        redAlliance2Column.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
         redAlliance3Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("redAlliance3"));
+        redAlliance3Column.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
         blueAlliance1Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueAlliance1"));
+        blueAlliance1Column.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
         blueAlliance2Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueAlliance2"));
+        blueAlliance2Column.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
         blueAlliance3Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueAlliance3"));
+        blueAlliance3Column.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
         redScoreColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("redScore"));
+        redScoreColumn.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
         blueScoreColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueScore"));
+        blueScoreColumn.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
     }
 
-    @FXML
+    public void setupApp(ActionEvent actionEvent) throws Exception {
+        //Path of main directory for the application's data to be held in
+        String startingPath = System.getProperty("user.home") + System.getProperty("file.separator") + "Robotics Live Analyzer";
+        //Create said main directory
+        NewDirectory mainDirectory = new NewDirectory(startingPath, "");
+        mainDirectory.makeDirectory(false);
+        //Create data directory
+        mainDirectory = new NewDirectory(startingPath, System.getProperty("file.separator") + "Data");
+        mainDirectory.makeDirectory(true);
+        //Create file holding file path of data directory and write the file path to said file
+        Writer writer = null;
+        try {
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(startingPath + System.getProperty("file.separator") + "openMe.txt")));
+            writer.write(startingPath + System.getProperty("file.separator") + "Data");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                writer.close();
+            } catch (Exception ignored) { }
+        }
+    }
+
     public void initNewTeam(ActionEvent actionEvent) throws Exception {
         String teamName = Dialogs.showNewTeamDialog();
-        if (teamName != null) {
+        if (teamName != null && !teams.contains(teamName)) {
             teams.add(teamName);
+            NewDirectory forTeam = new NewDirectory(mainDirectory.toString(), teamName);
+            forTeam.makeDirectory(true);
         }
     }
 
