@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 /**
  * @author Octogonapus
- * @contributor jackkates
+ * @author jackkates
  */
 
 public class Match {

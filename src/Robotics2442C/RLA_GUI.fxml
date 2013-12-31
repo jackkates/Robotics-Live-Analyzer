@@ -20,6 +20,7 @@
             <MenuItem mnemonicParsing="false" onAction="#setupApp" text="Setup" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" onAction="#openApp" text="Open" />
+            <MenuItem mnemonicParsing="false" onAction="#saveApp" text="Save" />
             <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Close" />
           </items>
         </Menu>
@@ -27,7 +28,7 @@
           <items>
             <Menu mnemonicParsing="false" text="New...">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#initNewTeam" text="Team" />
+                <MenuItem mnemonicParsing="false" onAction="#newTeam" text="Team" />
                 <MenuItem mnemonicParsing="false" onAction="#newMatch" text="Match" />
               </items>
             </Menu>

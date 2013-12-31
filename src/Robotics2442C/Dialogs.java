@@ -10,7 +10,7 @@ import java.io.IOException;
 
 /**
  * @author jackkates
- * @contributor Octogonapus
+ * @author Octogonapus
  */
 public class Dialogs {
 
@@ -63,5 +63,22 @@ public class Dialogs {
         stage.showAndWait();
 
         return controller.getPressState();
+    }
+
+    public static String showNewMatchDialog() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("RLA_NewMatchDialog.fxml"));
+        Parent page = (Parent) loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("New Match");
+        stage.initModality(Modality.WINDOW_MODAL);
+
+        Scene scene = new Scene(page);
+        stage.setScene(scene);
+
+        NewMatchDialogController controller = loader.getController();
+
+        stage.showAndWait();
+
+        return controller.getMatchName();
     }
 }

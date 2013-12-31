@@ -24,9 +24,7 @@ public class NewCompetitionDialogController implements Initializable {
     private String competitionName;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
+    public void initialize(URL url, ResourceBundle resourceBundle) { }
 
     public void newCompetitionButtonPressed(ActionEvent actionEvent) {
         competitionName = newCompField.getText();

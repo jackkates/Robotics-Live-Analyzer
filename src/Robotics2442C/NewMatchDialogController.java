@@ -3,7 +3,6 @@ package Robotics2442C;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -12,29 +11,29 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * @author jackkates
+ * @author Octogonapus
  */
-public class NewTeamDialogController implements Initializable {
+
+public class NewMatchDialogController implements Initializable {
+    @FXML
+    private TextField newMatchField;
 
     @FXML
-    private TextField newTeamField;
+    private Button addMatchButton;
 
-    @FXML
-    private Button addTeamButton;
-
-    private String teamName;
+    private String matchName;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) { }
 
-    public void addTeamButtonPressed(ActionEvent actionEvent) {
-        teamName = newTeamField.getText();
+    public void addMatchButtonPressed(ActionEvent actionEvent) {
+        matchName = newMatchField.getText();
         //Get stage and close stage
-        Stage stage = (Stage) addTeamButton.getScene().getWindow();
+        Stage stage = (Stage) addMatchButton.getScene().getWindow();
         stage.close();
     }
 
-    public String getTeamName() {
-        return teamName;
+    public String getMatchName() {
+        return matchName;
     }
 }

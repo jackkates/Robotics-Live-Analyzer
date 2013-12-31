@@ -28,12 +28,6 @@ public class DataManager {
             System.out.println("File " + startingFile.toString() + " not created.");
         }
         Controller.setMainDirectory();
-        bindMainFile();
-    }
-
-    public static void bindMainFile() {
-        XMLHandler.write("robotics.xml");
-        xmlFileParsed.putAll(XMLHandler.readIn(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Robotics Live Analyzer" + System.getProperty("file.separator") + "robotics.xml")));
     }
 
     public static void testBoundFile() {
@@ -69,6 +63,27 @@ public class DataManager {
         }
     }
 
+    public static void openApp(File file) {
+        xmlFileParsed.putAll(XMLHandler.readIn(file));
+    }
+
+    public static void saveApp() {
+        //XMLHandler.save(xmlFileParsed, "robotics.xml");
+        //XMLHandler.write("robotics.xml");
+        XOMTryout.save(xmlFileParsed, "robotics.xml");
+    }
+
+    public static void fillMatch(String teamName, String matchName) {
+        xmlFileParsed.get(teamName).get(matchName).setRedAlliance1(" ");
+        xmlFileParsed.get(teamName).get(matchName).setRedAlliance2(" ");
+        xmlFileParsed.get(teamName).get(matchName).setRedAlliance3(" ");
+        xmlFileParsed.get(teamName).get(matchName).setBlueAlliance1(" ");
+        xmlFileParsed.get(teamName).get(matchName).setBlueAlliance2(" ");
+        xmlFileParsed.get(teamName).get(matchName).setBlueAlliance3(" ");
+        xmlFileParsed.get(teamName).get(matchName).setRedScore(" ");
+        xmlFileParsed.get(teamName).get(matchName).setBlueScore(" ");
+    }
+
     public static void newTeam(String teamName) {
         xmlFileParsed.put(teamName, new HashMap<String, Match>(0));
     }
@@ -81,6 +96,10 @@ public class DataManager {
     public static void renameMatch(String teamName, String matchName, String matchNameNew) {
         Match match = xmlFileParsed.get(teamName).get(matchName);
         xmlFileParsed.get(teamName).put(matchNameNew, match);
+    }
+
+    public static void deleteTeam(String teamName) {
+        xmlFileParsed.remove(teamName);
     }
 
     public static void setRedAlliance1(String teamName, String matchName, String redAlliance1) {
@@ -113,6 +132,12 @@ public class DataManager {
 
     public static void setBlueScore(String teamName, String matchName, String blueScore) {
         xmlFileParsed.get(teamName).get(matchName).setBlueScore(blueScore);
+    }
+
+    public static String[] getTeamNames() {
+        String[] teamNamesArray = new String[xmlFileParsed.size()];
+        teamNamesArray = xmlFileParsed.keySet().toArray(teamNamesArray);
+        return teamNamesArray;
     }
 
     public static String[] getMatchNames(String teamName) {

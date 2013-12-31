@@ -15,14 +15,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
+import javax.xml.crypto.Data;
 import java.io.*;
 import java.net.URL;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
 /**
  * @author Octogonapus
- * @contributor jackkates
+ * @author jackkates
  */
 
 public class Controller implements Initializable {
@@ -41,6 +44,7 @@ public class Controller implements Initializable {
     @FXML
     private final TableView<Match> mainTable = new TableView<Match>();
     private static final ObservableList<Match> tableData = FXCollections.observableArrayList();
+    private String currentMatchSelection;
     /**
      * TableView
      */
@@ -85,6 +89,13 @@ public class Controller implements Initializable {
             }
         });
 
+        mainTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Match>() {
+            @Override
+            public void changed(ObservableValue<? extends Match> observableValue, Match match, Match match2) {
+                currentMatchSelection = match2.getMatchName();
+            }
+        });
+
         mainTable.setEditable(true);
         mainTable.setItems(tableData);
 
@@ -97,6 +108,7 @@ public class Controller implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setMatchName(t.getNewValue());
+                DataManager.renameMatch(currentTeamSelection, t.getOldValue(), t.getNewValue());
             }
         });
         redAlliance1Column.setCellValueFactory(new PropertyValueFactory<Match, String>("redAlliance1"));
@@ -105,6 +117,7 @@ public class Controller implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setRedAlliance1(t.getNewValue());
+                DataManager.setRedAlliance1(currentTeamSelection, currentMatchSelection, t.getNewValue());
             }
         });
         redAlliance2Column.setCellValueFactory(new PropertyValueFactory<Match, String>("redAlliance2"));
@@ -167,41 +180,31 @@ public class Controller implements Initializable {
 
     public void setupApp(ActionEvent actionEvent) throws Exception {
         DataManager.setupMainFolder();
-
-        //Testing XML is in setup because it's easy to call right on startup
-        DataManager.testBoundFile();
-        DataManager.newTeam("ABCD");
-        DataManager.newMatch("ABCD", "ABCDMATCH1");
-        DataManager.setRedAlliance2("ABCD", "ABCDMATCH1", "ABCDMATCH1REDALLIANCE2");
-        DataManager.testBoundFile();
-        DataManager.renameMatch("ABCD", "ABCDMATCH1", "ABCDMATCH1RENAMED");
-        DataManager.testBoundFile();
     }
 
-    public void initNewTeam(ActionEvent actionEvent) throws Exception {
+    public void newTeam(ActionEvent actionEvent) throws Exception {
         String teamName = Dialogs.showNewTeamDialog();
         if (teamName != null && !teams.contains(teamName)) {
             teams.add(teamName);
-            PrintWriter writer = new PrintWriter(System.getProperty("user.home") + fileSeparator + "Robotics Live Analyzer" + fileSeparator + "openMe.cfe");
-            for (String team : teams) {
-                writer.write(team);
-                if (teams.indexOf(team) != teams.size() - 1) {
-                    writer.write(",");
-                }
-            }
-            writer.close();
-            DirectoryTools.makeDirectory(mainDirectory.toString(), teamName, true);
+            DataManager.newTeam(teamName);
         }
     }
 
     public void deleteTeam(ActionEvent actionEvent) {
         if (teamList.getSelectionModel().getSelectedItem() != null) {
-            teams.remove(teamList.getSelectionModel().getSelectedItem());
+            teams.remove(currentTeamSelection);
+            DataManager.deleteTeam(currentTeamSelection);
         }
     }
 
     public void newMatch(ActionEvent actionEvent) throws Exception {
-        tableData.add(new Match());
+        String matchName = Dialogs.showNewMatchDialog();
+        if (currentTeamSelection != null) {
+            tableData.add(0, new Match());
+            tableData.get(0).setMatchName(matchName);
+            DataManager.newMatch(currentTeamSelection, matchName);
+            DataManager.fillMatch(currentTeamSelection, matchName);
+        }
     }
 
     //TODO: Implement initAnalyzeTeam
@@ -217,13 +220,16 @@ public class Controller implements Initializable {
     public void openApp(ActionEvent actionEvent) {
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Resource File");
+        fileChooser.setTitle("Open XML Resource File");
         fileChooser.setInitialDirectory(new File((System.getProperty("user.home"))));
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("txt", "*.txt"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("xml", "*.xml"));
         File file = fileChooser.showOpenDialog(stage);
-        //TODO: Fix openApp
-        /*CFE_Handler handler = new CFE_Handler();
-        teams.setAll(handler.loadFile(file));*/
+        DataManager.openApp(file);
+        Collections.addAll(teams, DataManager.getTeamNames());
+    }
+
+    public void saveApp(ActionEvent actionEvent) {
+        DataManager.saveApp();
     }
 
     public void closeApp(ActionEvent actionEvent) {
