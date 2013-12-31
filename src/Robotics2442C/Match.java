@@ -7,8 +7,7 @@ import javafx.beans.property.SimpleStringProperty;
  * @contributor jackkates
  */
 
-public class Competition {
-    private final SimpleStringProperty competitionName = new SimpleStringProperty();
+public class Match {
     private final SimpleStringProperty matchName = new SimpleStringProperty();
     private final SimpleStringProperty redAlliance1 = new SimpleStringProperty();
     private final SimpleStringProperty redAlliance2 = new SimpleStringProperty();
@@ -19,10 +18,9 @@ public class Competition {
     private final SimpleStringProperty redScore = new SimpleStringProperty();
     private final SimpleStringProperty blueScore = new SimpleStringProperty();
 
-    public Competition() { }
+    public Match() { }
 
-    public Competition(String competitionName, String matchName, String redAlliance1, String redAlliance2, String redAlliance3, String blueAlliance1, String blueAlliance2, String blueAlliance3, String redScore, String blueScore) {
-        this.competitionName.set(competitionName);
+    public Match(String matchName, String redAlliance1, String redAlliance2, String redAlliance3, String blueAlliance1, String blueAlliance2, String blueAlliance3, String redScore, String blueScore) {
         this.matchName.set(matchName);
         this.redAlliance1.set(redAlliance1);
         this.redAlliance2.set(redAlliance2);
@@ -32,18 +30,6 @@ public class Competition {
         this.blueAlliance3.set(blueAlliance3);
         this.redScore.set(redScore);
         this.blueScore.set(blueScore);
-    }
-
-    public String getCompetitionName() {
-        return competitionName.get();
-    }
-
-    public SimpleStringProperty competitionNameProperty() {
-        return competitionName;
-    }
-
-    public void setCompetitionName(String competitionName) {
-        this.competitionName.set(competitionName);
     }
 
     public String getMatchName() {

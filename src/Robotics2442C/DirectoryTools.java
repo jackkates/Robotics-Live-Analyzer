@@ -40,9 +40,6 @@ public class DirectoryTools {
                 return pathname.isDirectory();
             }
         }));
-        if (files.contains(".DS_Store")) {
-            files.remove(".DS_Store");
-        }
         File[] filesCaster = new File[1];
         return files.toArray(filesCaster);
     }

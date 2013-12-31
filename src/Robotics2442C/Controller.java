@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
-import java.util.Collections;
 import java.util.ResourceBundle;
 
 /**
@@ -40,35 +39,29 @@ public class Controller implements Initializable {
     @FXML
     private TextField searchField;
     @FXML
-    private final ChoiceBox<String> competitionChooser = new ChoiceBox<String>();
-    private static final ObservableList<String> competitions = FXCollections.observableArrayList();
-    private int currentCompSelection;
-    @FXML
-    private final TableView<Competition> mainTable = new TableView<Competition>();
-    private static final ObservableList<Competition> tableData = FXCollections.observableArrayList();
+    private final TableView<Match> mainTable = new TableView<Match>();
+    private static final ObservableList<Match> tableData = FXCollections.observableArrayList();
     /**
      * TableView
      */
     @FXML
-    private TableColumn<Competition, String> compColumn;
+    private TableColumn<Match, String> matchColumn;
     @FXML
-    private TableColumn<Competition, String> matchColumn;
+    private TableColumn<Match, String> redAlliance1Column;
     @FXML
-    private TableColumn<Competition, String> redAlliance1Column;
+    private TableColumn<Match, String> redAlliance2Column;
     @FXML
-    private TableColumn<Competition, String> redAlliance2Column;
+    private TableColumn<Match, String> redAlliance3Column;
     @FXML
-    private TableColumn<Competition, String> redAlliance3Column;
+    private TableColumn<Match, String> blueAlliance1Column;
     @FXML
-    private TableColumn<Competition, String> blueAlliance1Column;
+    private TableColumn<Match, String> blueAlliance2Column;
     @FXML
-    private TableColumn<Competition, String> blueAlliance2Column;
+    private TableColumn<Match, String> blueAlliance3Column;
     @FXML
-    private TableColumn<Competition, String> blueAlliance3Column;
+    private TableColumn<Match, String> redScoreColumn;
     @FXML
-    private TableColumn<Competition, String> redScoreColumn;
-    @FXML
-    private TableColumn<Competition, String> blueScoreColumn;
+    private TableColumn<Match, String> blueScoreColumn;
 
     public Controller() {
     }
@@ -83,23 +76,12 @@ public class Controller implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String s2) {
                 currentTeamSelection = s2;
-                CBE_Handler handler = new CBE_Handler();
+                //TODO: Fix teamList ChangeListener
+                /*CBE_Handler handler = new CBE_Handler();
                 if (handler.loadMatches(s2) != null) {
                     tableData.clear();
                     tableData.setAll(handler.loadMatches(s2));
-                    competitions.clear();
-                    for (File competition : DirectoryTools.printDirectoryFiles(mainDirectory.toString() + System.getProperty("file.separator") + s2)) {
-                        competitions.add(competition.getName());
-                    }
-                }
-            }
-        });
-
-        competitionChooser.setItems(competitions);
-        competitionChooser.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
-                currentCompSelection = number2.intValue();
+                }*/
             }
         });
 
@@ -109,94 +91,82 @@ public class Controller implements Initializable {
         /**
          * TableView Columns
          */
-        compColumn.setEditable(false);
-        compColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("competitionName"));
-        matchColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("matchName"));
-        matchColumn.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
-        matchColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Competition, String>>() {
+        matchColumn.setCellValueFactory(new PropertyValueFactory<Match, String>("matchName"));
+        matchColumn.setCellFactory(TextFieldTableCell.<Match>forTableColumn());
+        matchColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Match, String>>() {
             @Override
-            public void handle(TableColumn.CellEditEvent<Competition, String> t) {
+            public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setMatchName(t.getNewValue());
-                SaveTools.save(currentTeamSelection, tableData.get(tableData.indexOf(t.getTableView().getItems().get(t.getTablePosition().getRow()).getCompetitionName())));
             }
         });
-        redAlliance1Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("redAlliance1"));
-        redAlliance1Column.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
-        redAlliance1Column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Competition, String>>() {
+        redAlliance1Column.setCellValueFactory(new PropertyValueFactory<Match, String>("redAlliance1"));
+        redAlliance1Column.setCellFactory(TextFieldTableCell.<Match>forTableColumn());
+        redAlliance1Column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Match, String>>() {
             @Override
-            public void handle(TableColumn.CellEditEvent<Competition, String> t) {
+            public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setRedAlliance1(t.getNewValue());
             }
         });
-        redAlliance2Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("redAlliance2"));
-        redAlliance2Column.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
-        redAlliance2Column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Competition, String>>() {
+        redAlliance2Column.setCellValueFactory(new PropertyValueFactory<Match, String>("redAlliance2"));
+        redAlliance2Column.setCellFactory(TextFieldTableCell.<Match>forTableColumn());
+        redAlliance2Column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Match, String>>() {
             @Override
-            public void handle(TableColumn.CellEditEvent<Competition, String> t) {
+            public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setRedAlliance2(t.getNewValue());
             }
         });
-        redAlliance3Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("redAlliance3"));
-        redAlliance3Column.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
-        redAlliance3Column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Competition, String>>() {
+        redAlliance3Column.setCellValueFactory(new PropertyValueFactory<Match, String>("redAlliance3"));
+        redAlliance3Column.setCellFactory(TextFieldTableCell.<Match>forTableColumn());
+        redAlliance3Column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Match, String>>() {
             @Override
-            public void handle(TableColumn.CellEditEvent<Competition, String> t) {
+            public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setRedAlliance3(t.getNewValue());
             }
         });
-        blueAlliance1Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueAlliance1"));
-        blueAlliance1Column.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
-        blueAlliance1Column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Competition, String>>() {
+        blueAlliance1Column.setCellValueFactory(new PropertyValueFactory<Match, String>("blueAlliance1"));
+        blueAlliance1Column.setCellFactory(TextFieldTableCell.<Match>forTableColumn());
+        blueAlliance1Column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Match, String>>() {
             @Override
-            public void handle(TableColumn.CellEditEvent<Competition, String> t) {
+            public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setBlueAlliance1(t.getNewValue());
             }
         });
-        blueAlliance2Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueAlliance2"));
-        blueAlliance2Column.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
-        blueAlliance2Column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Competition, String>>() {
+        blueAlliance2Column.setCellValueFactory(new PropertyValueFactory<Match, String>("blueAlliance2"));
+        blueAlliance2Column.setCellFactory(TextFieldTableCell.<Match>forTableColumn());
+        blueAlliance2Column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Match, String>>() {
             @Override
-            public void handle(TableColumn.CellEditEvent<Competition, String> t) {
+            public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setBlueAlliance2(t.getNewValue());
             }
         });
-        blueAlliance3Column.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueAlliance3"));
-        blueAlliance3Column.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
-        blueAlliance3Column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Competition, String>>() {
+        blueAlliance3Column.setCellValueFactory(new PropertyValueFactory<Match, String>("blueAlliance3"));
+        blueAlliance3Column.setCellFactory(TextFieldTableCell.<Match>forTableColumn());
+        blueAlliance3Column.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Match, String>>() {
             @Override
-            public void handle(TableColumn.CellEditEvent<Competition, String> t) {
+            public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setBlueAlliance3(t.getNewValue());
             }
         });
-        redScoreColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("redScore"));
-        redScoreColumn.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
-        redScoreColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Competition, String>>() {
+        redScoreColumn.setCellValueFactory(new PropertyValueFactory<Match, String>("redScore"));
+        redScoreColumn.setCellFactory(TextFieldTableCell.<Match>forTableColumn());
+        redScoreColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Match, String>>() {
             @Override
-            public void handle(TableColumn.CellEditEvent<Competition, String> t) {
+            public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setRedScore(t.getNewValue());
             }
         });
-        blueScoreColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("blueScore"));
-        blueScoreColumn.setCellFactory(TextFieldTableCell.<Competition>forTableColumn());
-        blueScoreColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Competition, String>>() {
+        blueScoreColumn.setCellValueFactory(new PropertyValueFactory<Match, String>("blueScore"));
+        blueScoreColumn.setCellFactory(TextFieldTableCell.<Match>forTableColumn());
+        blueScoreColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Match, String>>() {
             @Override
-            public void handle(TableColumn.CellEditEvent<Competition, String> t) {
+            public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setBlueScore(t.getNewValue());
             }
         });
     }
 
     public void setupApp(ActionEvent actionEvent) throws Exception {
-        //Path of main directory for the application's data to be held in
-        String startingPath = System.getProperty("user.home") + fileSeparator + "Robotics Live Analyzer";
-        //Create said main directory
-        DirectoryTools.makeDirectory(startingPath, "", false);
-        //Create data directory
-        DirectoryTools.makeDirectory(startingPath, fileSeparator + "Data", true);
-        //Create CFE file
-        File CFE_File = new File(startingPath + fileSeparator + "openMe.cfe");
-        CFE_File.createNewFile();
-        setMainDirectory();
+        DataManager.setupMainFolder();
     }
 
     public void initNewTeam(ActionEvent actionEvent) throws Exception {
@@ -221,32 +191,8 @@ public class Controller implements Initializable {
         }
     }
 
-    public void initNewCompetition(ActionEvent actionEvent) throws Exception {
-        String competitionName = Dialogs.showNewCompetitionDialog();
-        //If a competition name was returned, add it to the list
-        if (competitionName != null) {
-            competitions.add(competitionName);
-            if (!DirectoryTools.searchDirectory(new File(mainDirectory + fileSeparator + teamList.getSelectionModel().getSelectedItem()), competitionName)) {
-                DirectoryTools.makeDirectory(mainDirectory + fileSeparator + teamList.getSelectionModel().getSelectedItem(), competitionName, true);
-            }
-        }
-    }
-
-    public void deleteCompetition(ActionEvent actionEvent) throws Exception {
-        boolean doDelete = Dialogs.showDeleteCompetitionDialog();
-        //If doDelete returns true, delete the currently selected competition
-        if (doDelete) {
-            try {
-                competitions.remove(currentCompSelection);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                //TODO: Implement user friendly error report
-                e.printStackTrace();
-            }
-        }
-    }
-
     public void newMatch(ActionEvent actionEvent) throws Exception {
-        tableData.add(new Competition());
+        tableData.add(new Match());
     }
 
     //TODO: Implement initAnalyzeTeam
@@ -264,10 +210,11 @@ public class Controller implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
         fileChooser.setInitialDirectory(new File((System.getProperty("user.home"))));
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("cfe", "*.cfe"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("txt", "*.txt"));
         File file = fileChooser.showOpenDialog(stage);
-        CFE_Handler handler = new CFE_Handler();
-        teams.setAll(handler.loadFile(file));
+        //TODO: Fix openApp
+        /*CFE_Handler handler = new CFE_Handler();
+        teams.setAll(handler.loadFile(file));*/
     }
 
     public void closeApp(ActionEvent actionEvent) {
