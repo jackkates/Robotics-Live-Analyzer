@@ -75,7 +75,7 @@ public class XMLHandler {
                 nNode = nList.item(i);
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
-                    xmlFileParsed.put(eElement.getAttribute("id"), new HashMap<String, Match>());
+                    xmlFileParsed.put(eElement.getAttribute("id"), new HashMap<String, Match>(0));
                     xmlFileParsed.get(eElement.getAttribute("id")).put(eElement.getElementsByTagName("match").item(0).getTextContent(), new Match());
                     xmlFileParsed.get(eElement.getAttribute("id")).get(eElement.getElementsByTagName("match").item(0).getTextContent()).setMatchName(eElement.getElementsByTagName("match").item(0).getTextContent());
                     //xmlFileParsed.get(eElement.getAttribute("id")).put(eElement.getElementsByTagName("redAlliance1").item(0).getTextContent(), new Match());

@@ -167,6 +167,15 @@ public class Controller implements Initializable {
 
     public void setupApp(ActionEvent actionEvent) throws Exception {
         DataManager.setupMainFolder();
+
+        //Testing XML is in setup because it's easy to call right on startup
+        DataManager.testBoundFile();
+        DataManager.newTeam("ABCD");
+        DataManager.newMatch("ABCD", "ABCDMATCH1");
+        DataManager.setRedAlliance2("ABCD", "ABCDMATCH1", "ABCDMATCH1REDALLIANCE2");
+        DataManager.testBoundFile();
+        DataManager.renameMatch("ABCD", "ABCDMATCH1", "ABCDMATCH1RENAMED");
+        DataManager.testBoundFile();
     }
 
     public void initNewTeam(ActionEvent actionEvent) throws Exception {
