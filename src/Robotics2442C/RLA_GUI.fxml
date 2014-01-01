@@ -13,8 +13,7 @@
         <ListView fx:id="teamList" prefHeight="860.0" prefWidth="205.0" />
       </content>
     </ScrollPane>
-    <TextField fx:id="searchField" layoutX="14.0" layoutY="45.0" prefWidth="207.0" />
-    <MenuBar fx:id="menuBar" disable="false" focusTraversable="false" layoutX="14.0" layoutY="14.0" prefWidth="1651.0" useSystemMenuBar="false" visible="true">
+    <MenuBar disable="false" focusTraversable="false" layoutX="14.0" layoutY="14.0" prefWidth="1651.0" useSystemMenuBar="false" visible="true">
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
@@ -39,12 +38,6 @@
                 <MenuItem mnemonicParsing="false" onAction="#deleteMatch" text="Match" />
               </items>
             </Menu>
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Analyze">
-          <items>
-            <MenuItem mnemonicParsing="false" onAction="#initAnalyzeTeam" text="Team" />
-            <MenuItem mnemonicParsing="false" onAction="#initAnalyzeComp" text="Competition" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">

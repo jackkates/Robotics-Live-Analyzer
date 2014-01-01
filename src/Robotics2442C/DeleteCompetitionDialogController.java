@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 /**
  * @author Octogonapus
  */
+
 public class DeleteCompetitionDialogController implements Initializable {
 
     private boolean didPress = false;

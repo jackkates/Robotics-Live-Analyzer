@@ -32,6 +32,8 @@ public class Controller implements Initializable {
     public static File mainDirectory;
     public static final String fileSeparator = System.getProperty("file.separator");
     private Main mainApp;
+    public static boolean firstSave = true;
+
     /**
      * RLA_GUI.fxml
      */
@@ -40,11 +42,10 @@ public class Controller implements Initializable {
     private static final ObservableList<String> teams = FXCollections.observableArrayList();
     private String currentTeamSelection;
     @FXML
-    private TextField searchField;
-    @FXML
     private final TableView<Match> mainTable = new TableView<Match>();
     private static final ObservableList<Match> tableData = FXCollections.observableArrayList();
     private String currentMatchSelection;
+
     /**
      * TableView
      */
@@ -67,8 +68,7 @@ public class Controller implements Initializable {
     @FXML
     private TableColumn<Match, String> blueScoreColumn;
 
-    public Controller() {
-    }
+    public Controller() { }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -223,16 +223,6 @@ public class Controller implements Initializable {
         }
     }
 
-    //TODO: Implement initAnalyzeTeam
-    public void initAnalyzeTeam(ActionEvent actionEvent) {
-        //
-    }
-
-    //TODO: Implement initAnalyzeComp
-    public void initAnalyzeComp(ActionEvent actionEvent) {
-        //
-    }
-
     public void openApp(ActionEvent actionEvent) {
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
@@ -244,10 +234,17 @@ public class Controller implements Initializable {
             DataManager.openApp(file);
             Collections.addAll(teams, DataManager.getTeamNames());
         }
+        Controller.firstSave = false;
     }
 
-    public void saveApp(ActionEvent actionEvent) {
-        DataManager.saveApp();
+    public void saveApp(ActionEvent actionEvent) throws IOException {
+        if (Controller.firstSave) {
+            String fileName = Dialogs.showSetupFileDialog();
+            DataManager.saveApp(fileName);
+        } else {
+            DataManager.saveApp();
+        }
+        Controller.firstSave = false;
     }
 
     public void closeApp(ActionEvent actionEvent) {
@@ -266,6 +263,6 @@ public class Controller implements Initializable {
     }
 
     public static void setMainDirectory() {
-        Controller.mainDirectory = new File(System.getProperty("user.home") + fileSeparator + "Robotics Live Analyzer" + fileSeparator + "Data");
+        Controller.mainDirectory = new File(System.getProperty("user.home") + fileSeparator + "RoboDogs Live Analyzer" + fileSeparator + "Data");
     }
 }

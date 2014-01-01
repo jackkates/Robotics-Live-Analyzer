@@ -75,9 +75,12 @@ public class XOMHandler {
         //finalize and print document
         Document doc = new Document(root);
         try {
-            Serializer serializer = new Serializer(new PrintStream(System.getProperty("user.home") + System.getProperty("file.separator") + "Robotics Live Analyzer" + System.getProperty("file.separator") + fileName), "ISO-8859-1");
-            serializer.setIndent(4);
-            serializer.write(doc);
+            if (!Controller.firstSave && fileName != null) {
+                Serializer serializer = new Serializer(new PrintStream(System.getProperty("user.home") + System.getProperty("file.separator") + "RoboDogs Live Analyzer" + System.getProperty("file.separator") + fileName + ".xml"), "ISO-8859-1");
+                serializer.setIndent(4);
+                serializer.write(doc);
+                System.out.println("Saved");
+            }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {

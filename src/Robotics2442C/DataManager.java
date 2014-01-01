@@ -13,10 +13,11 @@ import java.util.Map;
 
 public class DataManager {
     private static Map<String, Map<String, Match>> xmlFileParsed = new HashMap<String, Map<String, Match>>(0);
+    public static String fileName = "";
 
     public static void setupMainFolder() throws IOException {
         //Path of main directory for the application's data to be held in
-        String startingPath = System.getProperty("user.home") + Controller.fileSeparator + "Robotics Live Analyzer";
+        String startingPath = System.getProperty("user.home") + Controller.fileSeparator + "RoboDogs Live Analyzer";
         //Create said main directory
         DirectoryTools.makeDirectory(startingPath, "", false);
         Controller.setMainDirectory();
@@ -56,12 +57,18 @@ public class DataManager {
     }
 
     public static void openApp(File file) {
-        //xmlFileParsed.putAll(XMLHandler.readIn(file));
         xmlFileParsed.putAll(XOMHandler.load(file));
+        DataManager.fileName = file.getName().replace(".xml", "");
+    }
+
+    public static void saveApp(String fileName) {
+        Controller.firstSave = false;
+        DataManager.fileName = fileName;
+        XOMHandler.save(xmlFileParsed, fileName);
     }
 
     public static void saveApp() {
-        XOMHandler.save(xmlFileParsed, "robotics.xml");
+        XOMHandler.save(xmlFileParsed, DataManager.fileName);
     }
 
     public static void fillMatch(String teamName, String matchName) {

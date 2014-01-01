@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- @author Octogonapus -->
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="239.0" prefWidth="353.21142578125" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Robotics2442C.SetupFileDialogController">
+  <children>
+    <TextField id="fileNameField" fx:id="fileNameField" layoutX="77.0" layoutY="109.0" prefWidth="200.0" />
+    <Button id="nameFileButton" fx:id="nameFileButton" layoutX="132.0" layoutY="142.0" mnemonicParsing="false" onAction="#nameFileButtonPressed" text="Name File" />
+    <Text layoutX="115.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter the file name:" />
+  </children>
+</AnchorPane>

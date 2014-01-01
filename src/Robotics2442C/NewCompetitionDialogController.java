@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 /**
  * @author jackkates
  */
+
 public class NewCompetitionDialogController implements Initializable {
 
     @FXML

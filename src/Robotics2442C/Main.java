@@ -18,7 +18,7 @@ public class Main extends Application {
         Parent root = (Parent) loader.load();
         Controller controller = loader.getController();
         controller.setMainApp(this);
-        primaryStage.setTitle("Robotics Live Competition Team Analyzer");
+        primaryStage.setTitle("RoboDogs Live Analyzer");
         primaryStage.setScene(new Scene(root, 1700, 961));
         primaryStage.setResizable(false);
         primaryStage.show();
