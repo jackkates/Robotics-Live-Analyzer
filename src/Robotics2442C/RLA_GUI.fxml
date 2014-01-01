@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- @author Octogonapus -->
+
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -35,6 +36,7 @@
             <Menu mnemonicParsing="false" text="Delete...">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#deleteTeam" text="Team" />
+                <MenuItem mnemonicParsing="false" onAction="#deleteMatch" text="Match" />
               </items>
             </Menu>
           </items>

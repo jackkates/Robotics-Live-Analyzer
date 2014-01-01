@@ -80,19 +80,19 @@ public class Controller implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String s2) {
                 currentTeamSelection = s2;
-                //TODO: Fix teamList ChangeListener
-                /*CBE_Handler handler = new CBE_Handler();
-                if (handler.loadMatches(s2) != null) {
-                    tableData.clear();
-                    tableData.setAll(handler.loadMatches(s2));
-                }*/
+                tableData.clear();
+                if (DataManager.getMatches(s2) != null) {
+                    Collections.addAll(tableData, DataManager.getMatches(s2));
+                }
             }
         });
 
         mainTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Match>() {
             @Override
             public void changed(ObservableValue<? extends Match> observableValue, Match match, Match match2) {
-                currentMatchSelection = match2.getMatchName();
+                if (match2 != null) {
+                    currentMatchSelection = match2.getMatchName();
+                }
             }
         });
 
@@ -126,6 +126,7 @@ public class Controller implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setRedAlliance2(t.getNewValue());
+                DataManager.setRedAlliance2(currentTeamSelection, currentMatchSelection, t.getNewValue());
             }
         });
         redAlliance3Column.setCellValueFactory(new PropertyValueFactory<Match, String>("redAlliance3"));
@@ -134,6 +135,7 @@ public class Controller implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setRedAlliance3(t.getNewValue());
+                DataManager.setRedAlliance3(currentTeamSelection, currentMatchSelection, t.getNewValue());
             }
         });
         blueAlliance1Column.setCellValueFactory(new PropertyValueFactory<Match, String>("blueAlliance1"));
@@ -142,6 +144,7 @@ public class Controller implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setBlueAlliance1(t.getNewValue());
+                DataManager.setBlueAlliance1(currentTeamSelection, currentMatchSelection, t.getNewValue());
             }
         });
         blueAlliance2Column.setCellValueFactory(new PropertyValueFactory<Match, String>("blueAlliance2"));
@@ -150,6 +153,7 @@ public class Controller implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setBlueAlliance2(t.getNewValue());
+                DataManager.setBlueAlliance2(currentTeamSelection, currentMatchSelection, t.getNewValue());
             }
         });
         blueAlliance3Column.setCellValueFactory(new PropertyValueFactory<Match, String>("blueAlliance3"));
@@ -158,6 +162,7 @@ public class Controller implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setBlueAlliance3(t.getNewValue());
+                DataManager.setBlueAlliance3(currentTeamSelection, currentMatchSelection, t.getNewValue());
             }
         });
         redScoreColumn.setCellValueFactory(new PropertyValueFactory<Match, String>("redScore"));
@@ -166,6 +171,7 @@ public class Controller implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setRedScore(t.getNewValue());
+                DataManager.setRedScore(currentTeamSelection, currentMatchSelection, t.getNewValue());
             }
         });
         blueScoreColumn.setCellValueFactory(new PropertyValueFactory<Match, String>("blueScore"));
@@ -174,6 +180,7 @@ public class Controller implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setBlueScore(t.getNewValue());
+                DataManager.setBlueScore(currentTeamSelection, currentMatchSelection, t.getNewValue());
             }
         });
     }
@@ -200,10 +207,19 @@ public class Controller implements Initializable {
     public void newMatch(ActionEvent actionEvent) throws Exception {
         String matchName = Dialogs.showNewMatchDialog();
         if (currentTeamSelection != null) {
-            tableData.add(0, new Match());
-            tableData.get(0).setMatchName(matchName);
-            DataManager.newMatch(currentTeamSelection, matchName);
-            DataManager.fillMatch(currentTeamSelection, matchName);
+            if (matchName != null) {
+                tableData.add(0, new Match());
+                tableData.get(0).setMatchName(matchName);
+                DataManager.newMatch(currentTeamSelection, matchName);
+                DataManager.fillMatch(currentTeamSelection, matchName);
+            }
+        }
+    }
+
+    public void deleteMatch(ActionEvent actionEvent) {
+        if (mainTable.getSelectionModel().selectedItemProperty().getValue() != null) {
+            tableData.remove(mainTable.getSelectionModel().selectedItemProperty().getValue());
+            DataManager.deleteMatch(currentTeamSelection, currentMatchSelection);
         }
     }
 
@@ -224,8 +240,10 @@ public class Controller implements Initializable {
         fileChooser.setInitialDirectory(new File((System.getProperty("user.home"))));
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("xml", "*.xml"));
         File file = fileChooser.showOpenDialog(stage);
-        DataManager.openApp(file);
-        Collections.addAll(teams, DataManager.getTeamNames());
+        if (file != null) {
+            DataManager.openApp(file);
+            Collections.addAll(teams, DataManager.getTeamNames());
+        }
     }
 
     public void saveApp(ActionEvent actionEvent) {

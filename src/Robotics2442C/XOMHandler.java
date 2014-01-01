@@ -1,17 +1,15 @@
 package Robotics2442C;
 
-import nu.xom.Attribute;
-import nu.xom.Document;
-import nu.xom.Element;
-import nu.xom.Serializer;
+import nu.xom.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class XOMTryout {
+public class XOMHandler {
 
     public static void save(Map<String, Map<String, Match>> xmlFileParsed, String fileName) {
         //root element
@@ -29,48 +27,48 @@ public class XOMTryout {
             for (Map.Entry<String, Match> entryDeep : fileTemp.entrySet()) {
                 //match element
                 Element match = new Element("match");
-                match.appendChild(entryDeep.getKey());
+                match.addAttribute(new Attribute("id", entryDeep.getKey()));
                 team.appendChild(match);
 
                 //redAlliance1 element
                 Element redAlliance1 = new Element("redAlliance1");
                 redAlliance1.appendChild(entryDeep.getValue().getRedAlliance1());
-                team.appendChild(redAlliance1);
+                match.appendChild(redAlliance1);
 
                 //redAlliance2 element
                 Element redAlliance2 = new Element("redAlliance2");
                 redAlliance2.appendChild(entryDeep.getValue().getRedAlliance2());
-                team.appendChild(redAlliance2);
+                match.appendChild(redAlliance2);
 
                 //redAlliance3 element
                 Element redAlliance3 = new Element("redAlliance3");
                 redAlliance3.appendChild(entryDeep.getValue().getRedAlliance3());
-                team.appendChild(redAlliance3);
+                match.appendChild(redAlliance3);
 
                 //blueAlliance1 element
                 Element blueAlliance1 = new Element("blueAlliance1");
                 blueAlliance1.appendChild(entryDeep.getValue().getBlueAlliance1());
-                team.appendChild(blueAlliance1);
+                match.appendChild(blueAlliance1);
 
                 //blueAlliance2 element
                 Element blueAlliance2 = new Element("blueAlliance2");
                 blueAlliance2.appendChild(entryDeep.getValue().getBlueAlliance2());
-                team.appendChild(blueAlliance2);
+                match.appendChild(blueAlliance2);
 
                 //blueAlliance3 element
                 Element blueAlliance3 = new Element("blueAlliance3");
                 blueAlliance3.appendChild(entryDeep.getValue().getBlueAlliance3());
-                team.appendChild(blueAlliance3);
+                match.appendChild(blueAlliance3);
 
                 //redScore element
                 Element redScore = new Element("redScore");
                 redScore.appendChild(entryDeep.getValue().getRedScore());
-                team.appendChild(redScore);
+                match.appendChild(redScore);
 
                 //blueScore element
                 Element blueScore = new Element("blueScore");
                 blueScore.appendChild(entryDeep.getValue().getBlueScore());
-                team.appendChild(blueScore);
+                match.appendChild(blueScore);
             }
         }
 
@@ -85,5 +83,39 @@ public class XOMTryout {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static Map<String, Map<String, Match>> load(File xmlFile) {
+        Builder builder = new Builder();
+        Map<String, Map<String, Match>> xmlFileParsed = new HashMap<String, Map<String, Match>>(0);
+        try {
+            Document doc = builder.build(xmlFile);
+            Element root = doc.getRootElement();
+            for (int i = 0; i < root.getChildElements("team").size(); i++) {
+                Element team = root.getChildElements("team").get(i);
+                String teamId = team.getAttributeValue("id");
+                xmlFileParsed.put(teamId, new HashMap<String, Match>(0));
+                for (int j = 0; j < team.getChildElements("match").size(); j++) {
+                    Element match = root.getChildElements("team").get(i).getChildElements("match").get(j);
+                    String matchId = match.getAttributeValue("id");
+                    String redAlliance1 = match.getFirstChildElement("redAlliance1").getValue();
+                    String redAlliance2 = match.getFirstChildElement("redAlliance2").getValue();
+                    String redAlliance3 = match.getFirstChildElement("redAlliance3").getValue();
+                    String blueAlliance1 = match.getFirstChildElement("blueAlliance1").getValue();
+                    String blueAlliance2 = match.getFirstChildElement("blueAlliance2").getValue();
+                    String blueAlliance3 = match.getFirstChildElement("blueAlliance3").getValue();
+                    String redScore = match.getFirstChildElement("redScore").getValue();
+                    String blueScore = match.getFirstChildElement("blueScore").getValue();
+                    xmlFileParsed.get(teamId).put(matchId, new Match(matchId, redAlliance1, redAlliance2, redAlliance3, blueAlliance1, blueAlliance2, blueAlliance3, redScore, blueScore));
+                }
+            }
+        } catch (ValidityException e) {
+            e.printStackTrace();
+        } catch (ParsingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return xmlFileParsed;
     }
 }

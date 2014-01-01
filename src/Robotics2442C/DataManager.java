@@ -2,6 +2,7 @@ package Robotics2442C;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -18,15 +19,6 @@ public class DataManager {
         String startingPath = System.getProperty("user.home") + Controller.fileSeparator + "Robotics Live Analyzer";
         //Create said main directory
         DirectoryTools.makeDirectory(startingPath, "", false);
-        //Create data directory
-        DirectoryTools.makeDirectory(startingPath, Controller.fileSeparator + "Data", true);
-        //Create CFE file
-        File startingFile = new File(startingPath + Controller.fileSeparator + "openMe.txt");
-        if (startingFile.createNewFile()) {
-            System.out.println("File " + startingFile.toString() + " created.");
-        } else {
-            System.out.println("File " + startingFile.toString() + " not created.");
-        }
         Controller.setMainDirectory();
     }
 
@@ -64,13 +56,12 @@ public class DataManager {
     }
 
     public static void openApp(File file) {
-        xmlFileParsed.putAll(XMLHandler.readIn(file));
+        //xmlFileParsed.putAll(XMLHandler.readIn(file));
+        xmlFileParsed.putAll(XOMHandler.load(file));
     }
 
     public static void saveApp() {
-        //XMLHandler.save(xmlFileParsed, "robotics.xml");
-        //XMLHandler.write("robotics.xml");
-        XOMTryout.save(xmlFileParsed, "robotics.xml");
+        XOMHandler.save(xmlFileParsed, "robotics.xml");
     }
 
     public static void fillMatch(String teamName, String matchName) {
@@ -100,6 +91,10 @@ public class DataManager {
 
     public static void deleteTeam(String teamName) {
         xmlFileParsed.remove(teamName);
+    }
+
+    public static void deleteMatch(String teamName, String matchName) {
+        xmlFileParsed.get(teamName).remove(matchName);
     }
 
     public static void setRedAlliance1(String teamName, String matchName, String redAlliance1) {
@@ -153,6 +148,14 @@ public class DataManager {
             i++;
         }
         return matchNamesArray;
+    }
+
+    public static Match[] getMatches(String teamName) {
+        Map<String, Match> matches = new HashMap<String, Match>(0);
+        matches.putAll(xmlFileParsed.get(teamName));
+        Match[] matchArray = new Match[matches.size()];
+        matchArray = matches.values().toArray(matchArray);
+        return matchArray;
     }
 
     public static String getRedAlliance1(String teamName, String matchName) {
