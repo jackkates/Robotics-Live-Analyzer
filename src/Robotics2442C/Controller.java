@@ -81,7 +81,7 @@ public class Controller implements Initializable {
             public void changed(ObservableValue<? extends String> observableValue, String s, String s2) {
                 currentTeamSelection = s2;
                 tableData.clear();
-                if (DataManager.getMatches(s2) != null) {
+                if (s2 != null) {
                     Collections.addAll(tableData, DataManager.getMatches(s2));
                 }
             }

@@ -20,7 +20,7 @@ public class Main extends Application {
         controller.setMainApp(this);
         primaryStage.setTitle("RoboDogs Live Analyzer");
         primaryStage.setScene(new Scene(root, 1700, 961));
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         primaryStage.show();
     }
 
