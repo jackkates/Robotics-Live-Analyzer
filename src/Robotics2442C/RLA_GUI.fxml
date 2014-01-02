@@ -66,6 +66,12 @@
                 </Menu>
               </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Analyze">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#initAllianceSelection" text="Alliance Selection" />
+                <MenuItem mnemonicParsing="false" onAction="#initMatchPairing" text="Match Pairing" />
+              </items>
+            </Menu>
             <Menu mnemonicParsing="false" text="Help">
               <items>
                 <MenuItem mnemonicParsing="false" text="About" />

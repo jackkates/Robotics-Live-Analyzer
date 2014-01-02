@@ -65,4 +65,19 @@ public class Dialogs {
 
         return controller.getFileName();
     }
+
+    public static void showAllianceSelectionDialog() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("RLA_AllianceSelectionDialog.fxml"));
+        Parent page = (Parent) loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Best Alliance Partners");
+        stage.initModality(Modality.WINDOW_MODAL);
+
+        Scene scene = new Scene(page);
+        stage.setScene(scene);
+
+        AllianceSelectionController controller = loader.getController();
+
+        stage.showAndWait();
+    }
 }

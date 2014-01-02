@@ -214,6 +214,8 @@ public class Controller implements Initializable {
                 DataManager.fillMatch(currentTeamSelection, matchName);
             }
         }
+        tableData.clear();
+        Collections.addAll(tableData, DataManager.getMatches(currentTeamSelection));
     }
 
     public void deleteMatch(ActionEvent actionEvent) {
@@ -249,6 +251,14 @@ public class Controller implements Initializable {
 
     public void closeApp(ActionEvent actionEvent) {
         System.exit(0);
+    }
+
+    public void initAllianceSelection(ActionEvent actionEvent) throws IOException {
+        Dialogs.showAllianceSelectionDialog();
+    }
+
+    public void initMatchPairing(ActionEvent actionEvent) {
+        //
     }
 
     /**

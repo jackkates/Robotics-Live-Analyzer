@@ -14,6 +14,7 @@ import java.util.Map;
 public class DataManager {
     private static Map<String, Map<String, Match>> xmlFileParsed = new HashMap<String, Map<String, Match>>(0);
     public static String fileName = "";
+    private static Map<String, String> winPercentage = new HashMap<String, String>(0);
 
     public static void setupMainFolder() throws IOException {
         //Path of main directory for the application's data to be held in
@@ -72,14 +73,14 @@ public class DataManager {
     }
 
     public static void fillMatch(String teamName, String matchName) {
-        xmlFileParsed.get(teamName).get(matchName).setRedAlliance1(" ");
-        xmlFileParsed.get(teamName).get(matchName).setRedAlliance2(" ");
-        xmlFileParsed.get(teamName).get(matchName).setRedAlliance3(" ");
-        xmlFileParsed.get(teamName).get(matchName).setBlueAlliance1(" ");
-        xmlFileParsed.get(teamName).get(matchName).setBlueAlliance2(" ");
-        xmlFileParsed.get(teamName).get(matchName).setBlueAlliance3(" ");
-        xmlFileParsed.get(teamName).get(matchName).setRedScore(" ");
-        xmlFileParsed.get(teamName).get(matchName).setBlueScore(" ");
+        xmlFileParsed.get(teamName).get(matchName).setRedAlliance1("");
+        xmlFileParsed.get(teamName).get(matchName).setRedAlliance2("");
+        xmlFileParsed.get(teamName).get(matchName).setRedAlliance3("");
+        xmlFileParsed.get(teamName).get(matchName).setBlueAlliance1("");
+        xmlFileParsed.get(teamName).get(matchName).setBlueAlliance2("");
+        xmlFileParsed.get(teamName).get(matchName).setBlueAlliance3("");
+        xmlFileParsed.get(teamName).get(matchName).setRedScore("");
+        xmlFileParsed.get(teamName).get(matchName).setBlueScore("");
     }
 
     public static void newTeam(String teamName) {
@@ -195,5 +196,13 @@ public class DataManager {
 
     public static String getBlueScore(String teamName, String matchName) {
         return xmlFileParsed.get(teamName).get(matchName).getBlueScore();
+    }
+
+    public static Map<String, Map<String, Match>> getXmlFileParsed() {
+        return xmlFileParsed;
+    }
+
+    public static Map<String, String> getWinPercentage() {
+        return winPercentage;
     }
 }
