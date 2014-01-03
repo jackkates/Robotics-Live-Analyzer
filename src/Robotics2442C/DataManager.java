@@ -69,7 +69,7 @@ public class DataManager {
      * @param fileName  The name of the file to write
      * @see Robotics2442C.XOMHandler
      */
-    public static void saveApp(String fileName) {
+    public static void saveApp(String fileName) throws IOException {
         Controller.firstSave = false;
         DataManager.fileName = fileName;
         XOMHandler.save(xmlFileParsed, fileName);
@@ -80,7 +80,7 @@ public class DataManager {
      *
      * @see Robotics2442C.XOMHandler
      */
-    public static void saveApp() {
+    public static void saveApp() throws IOException {
         XOMHandler.save(xmlFileParsed, DataManager.fileName);
     }
 
