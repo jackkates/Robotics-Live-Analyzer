@@ -99,23 +99,6 @@ public class DataManager {
     }
 
     /**
-     * Generates empty tags for the newly created match in the selected team.
-     *
-     * @param teamName  The team name which the match is in
-     * @param matchName The match for which to generate empty tags
-     */
-    public static void fillMatch(String teamName, String matchName) {
-        xmlFileParsed.get(teamName).get(matchName).setRedAlliance1("");
-        xmlFileParsed.get(teamName).get(matchName).setRedAlliance2("");
-        xmlFileParsed.get(teamName).get(matchName).setRedAlliance3("");
-        xmlFileParsed.get(teamName).get(matchName).setBlueAlliance1("");
-        xmlFileParsed.get(teamName).get(matchName).setBlueAlliance2("");
-        xmlFileParsed.get(teamName).get(matchName).setBlueAlliance3("");
-        xmlFileParsed.get(teamName).get(matchName).setRedScore("");
-        xmlFileParsed.get(teamName).get(matchName).setBlueScore("");
-    }
-
-    /**
      * Creates a new team.
      *
      * @param teamName  The name of the team to create

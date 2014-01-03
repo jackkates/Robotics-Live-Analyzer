@@ -258,7 +258,6 @@ public class Controller implements Initializable {
                 tableData.add(0, new Match());
                 tableData.get(0).setMatchName(matchName);
                 DataManager.newMatch(currentTeamSelection, matchName);
-                DataManager.fillMatch(currentTeamSelection, matchName);
             }
         }
         tableData.clear();

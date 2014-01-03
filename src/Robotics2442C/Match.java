@@ -20,7 +20,17 @@ public class Match {
     private final SimpleStringProperty redScore = new SimpleStringProperty();
     private final SimpleStringProperty blueScore = new SimpleStringProperty();
 
-    public Match() { }
+    public Match() {
+        this.matchName.set("");
+        this.redAlliance1.set("");
+        this.redAlliance2.set("");
+        this.redAlliance3.set("");
+        this.blueAlliance1.set("");
+        this.blueAlliance2.set("");
+        this.blueAlliance3.set("");
+        this.redScore.set("");
+        this.blueScore.set("");
+    }
 
     public Match(String matchName, String redAlliance1, String redAlliance2, String redAlliance3, String blueAlliance1, String blueAlliance2, String blueAlliance3, String redScore, String blueScore) {
         this.matchName.set(matchName);
