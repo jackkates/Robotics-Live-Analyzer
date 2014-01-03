@@ -44,6 +44,23 @@ public class Match {
         this.blueScore.set(blueScore);
     }
 
+    /**
+     * Overwrites the entire match with a new one.
+     *
+     * @param match The match to overwrite with
+     */
+    public void setMatch(Match match) {
+        this.matchName.set(match.getMatchName());
+        this.redAlliance1.set(match.getRedAlliance1());
+        this.redAlliance2.set(match.getRedAlliance2());
+        this.redAlliance3.set(match.getRedAlliance3());
+        this.blueAlliance1.set(match.getBlueAlliance1());
+        this.blueAlliance2.set(match.getBlueAlliance2());
+        this.blueAlliance3.set(match.getBlueAlliance3());
+        this.redScore.set(match.getRedScore());
+        this.blueScore.set(match.getBlueScore());
+    }
+
     public String getMatchName() {
         return matchName.get();
     }

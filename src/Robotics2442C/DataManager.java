@@ -8,6 +8,7 @@ import java.util.*;
  * Delegates other classes with requested tasks, acting like the center point of the application.
  *
  * @author Octogonapus
+ * @author jackkates
  */
 
 public class DataManager {
@@ -84,6 +85,24 @@ public class DataManager {
     }
 
     /**
+     * Gives or updates a match for all teams who are involved in that match.
+     *
+     * @param currentTeamSelection  The currently selected team
+     * @param currentMatchSelection The currently selected match
+     */
+    public static void updateMatch(String currentTeamSelection, String currentMatchSelection) {
+        String redAlliance1 = DataManager.getRedAlliance1(currentTeamSelection, currentMatchSelection);
+        if (DataManager.getTeamNamesList().contains(redAlliance1)) {
+            if (DataManager.getMatchesList(redAlliance1).contains(DataManager.getMatch(currentTeamSelection, currentMatchSelection))) {
+                DataManager.getMatch(redAlliance1, currentMatchSelection).setMatch(DataManager.getMatch(currentTeamSelection, currentMatchSelection));
+            } else {
+                DataManager.newMatch(redAlliance1, currentMatchSelection);
+                DataManager.getMatch(redAlliance1, currentMatchSelection).setMatch(DataManager.getMatch(currentTeamSelection, currentMatchSelection));
+            }
+        }
+    }
+
+    /**
      * Creates a new team.
      *
      * @param teamName  The name of the team to create
@@ -125,8 +144,6 @@ public class DataManager {
     public static void renameMatch(String teamName, String matchName, String newMatchName) {
         Match match = getMatch(teamName, matchName);
         match.setMatchName(newMatchName);
-        //Delete old match
-        deleteMatch(teamName, matchName);
         newMatch(teamName, newMatchName);
 
     }
@@ -160,10 +177,19 @@ public class DataManager {
     }
 
     /**
+     * Gets the names of all teams.
+     *
+     * @return  An array list of all team names
+     */
+    public static ArrayList<String> getTeamNamesList() {
+        return new ArrayList<>(Arrays.asList(xmlFileParsed.keySet().toArray(new String[xmlFileParsed.size()])));
+    }
+
+    /**
      * Gets the names of all matches for a team.
      *
      * @param teamName  The name of the team
-     * @return  An array of all match names for a team
+     * @return          An array of all match names for a team
      */
     public static String[] getMatchNames(String teamName) {
         Match[] matches = getMatches(teamName);
@@ -178,12 +204,22 @@ public class DataManager {
      * Gets all matches for a team.
      *
      * @param teamName  The name of the team
-     * @return  An array of all matches for a team
+     * @return          An array of all matches for a team
      */
     public static Match[] getMatches(String teamName) {
         Map<String, Match> matches = new HashMap<>(0);
         matches.putAll(xmlFileParsed.get(teamName));
         return matches.values().toArray(new Match[matches.size()]);
+    }
+
+    /**
+     * Gets all matches for a team.
+     *
+     * @param teamName  The name of the team
+     * @return          An array list of all matches for a team
+     */
+    public static ArrayList<Match> getMatchesList(String teamName) {
+        return new ArrayList<>(xmlFileParsed.get(teamName).values());
     }
 
     public static void setRedAlliance1(String teamName, String matchName, String redAlliance1) {

@@ -131,6 +131,7 @@ public class Controller implements Initializable {
             public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setRedAlliance1(t.getNewValue());
                 DataManager.setRedAlliance1(currentTeamSelection, currentMatchSelection, t.getNewValue());
+                DataManager.updateMatch(currentTeamSelection, currentMatchSelection);
             }
         });
         redAlliance2Column.setCellValueFactory(new PropertyValueFactory<Match, String>("redAlliance2"));
@@ -140,6 +141,7 @@ public class Controller implements Initializable {
             public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setRedAlliance2(t.getNewValue());
                 DataManager.setRedAlliance2(currentTeamSelection, currentMatchSelection, t.getNewValue());
+                DataManager.updateMatch(currentTeamSelection, currentMatchSelection);
             }
         });
         redAlliance3Column.setCellValueFactory(new PropertyValueFactory<Match, String>("redAlliance3"));
@@ -149,6 +151,7 @@ public class Controller implements Initializable {
             public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setRedAlliance3(t.getNewValue());
                 DataManager.setRedAlliance3(currentTeamSelection, currentMatchSelection, t.getNewValue());
+                DataManager.updateMatch(currentTeamSelection, currentMatchSelection);
             }
         });
         blueAlliance1Column.setCellValueFactory(new PropertyValueFactory<Match, String>("blueAlliance1"));
@@ -158,6 +161,7 @@ public class Controller implements Initializable {
             public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setBlueAlliance1(t.getNewValue());
                 DataManager.setBlueAlliance1(currentTeamSelection, currentMatchSelection, t.getNewValue());
+                DataManager.updateMatch(currentTeamSelection, currentMatchSelection);
             }
         });
         blueAlliance2Column.setCellValueFactory(new PropertyValueFactory<Match, String>("blueAlliance2"));
@@ -167,6 +171,7 @@ public class Controller implements Initializable {
             public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setBlueAlliance2(t.getNewValue());
                 DataManager.setBlueAlliance2(currentTeamSelection, currentMatchSelection, t.getNewValue());
+                DataManager.updateMatch(currentTeamSelection, currentMatchSelection);
             }
         });
         blueAlliance3Column.setCellValueFactory(new PropertyValueFactory<Match, String>("blueAlliance3"));
@@ -176,6 +181,7 @@ public class Controller implements Initializable {
             public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setBlueAlliance3(t.getNewValue());
                 DataManager.setBlueAlliance3(currentTeamSelection, currentMatchSelection, t.getNewValue());
+                DataManager.updateMatch(currentTeamSelection, currentMatchSelection);
             }
         });
         redScoreColumn.setCellValueFactory(new PropertyValueFactory<Match, String>("redScore"));
@@ -185,6 +191,7 @@ public class Controller implements Initializable {
             public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setRedScore(t.getNewValue());
                 DataManager.setRedScore(currentTeamSelection, currentMatchSelection, t.getNewValue());
+                DataManager.updateMatch(currentTeamSelection, currentMatchSelection);
             }
         });
         blueScoreColumn.setCellValueFactory(new PropertyValueFactory<Match, String>("blueScore"));
@@ -194,6 +201,7 @@ public class Controller implements Initializable {
             public void handle(TableColumn.CellEditEvent<Match, String> t) {
                 t.getTableView().getItems().get(t.getTablePosition().getRow()).setBlueScore(t.getNewValue());
                 DataManager.setBlueScore(currentTeamSelection, currentMatchSelection, t.getNewValue());
+                DataManager.updateMatch(currentTeamSelection, currentMatchSelection);
             }
         });
     }
