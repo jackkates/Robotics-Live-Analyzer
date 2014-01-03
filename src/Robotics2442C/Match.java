@@ -38,6 +38,9 @@ public class Match {
         return matchName.get();
     }
 
+    /**
+     * The name of the match
+     */
     public SimpleStringProperty matchNameProperty() {
         return matchName;
     }
@@ -50,6 +53,9 @@ public class Match {
         return redAlliance1.get();
     }
 
+    /**
+     * The name of the first red alliance member
+     */
     public SimpleStringProperty redAlliance1Property() {
         return redAlliance1;
     }
@@ -62,6 +68,9 @@ public class Match {
         return redAlliance2.get();
     }
 
+    /**
+     * The name of the second red alliance member
+     */
     public SimpleStringProperty redAlliance2Property() {
         return redAlliance2;
     }
@@ -74,6 +83,9 @@ public class Match {
         return redAlliance3.get();
     }
 
+    /**
+     * The name of the third red alliance member
+     */
     public SimpleStringProperty redAlliance3Property() {
         return redAlliance3;
     }
@@ -86,6 +98,9 @@ public class Match {
         return blueAlliance1.get();
     }
 
+    /**
+     * The name of the first blue alliance member
+     */
     public SimpleStringProperty blueAlliance1Property() {
         return blueAlliance1;
     }
@@ -98,6 +113,9 @@ public class Match {
         return blueAlliance2.get();
     }
 
+    /**
+     * The name of the second blue alliance member
+     */
     public SimpleStringProperty blueAlliance2Property() {
         return blueAlliance2;
     }
@@ -110,6 +128,9 @@ public class Match {
         return blueAlliance3.get();
     }
 
+    /**
+     * The name of the third blue alliance member
+     */
     public SimpleStringProperty blueAlliance3Property() {
         return blueAlliance3;
     }
@@ -122,6 +143,9 @@ public class Match {
         return redScore.get();
     }
 
+    /**
+     * The amount red scored at the end of the match
+     */
     public SimpleStringProperty redScoreProperty() {
         return redScore;
     }
@@ -134,6 +158,9 @@ public class Match {
         return blueScore.get();
     }
 
+    /**
+     * The amount blue scored at the end of the match
+     */
     public SimpleStringProperty blueScoreProperty() {
         return blueScore;
     }
