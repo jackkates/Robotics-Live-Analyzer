@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 
 /**
  * The main controller for the application.
@@ -34,13 +35,13 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     /**
-     * The main directory where all files for the application reside.
-     */
-    public static File mainDirectory;
-    /**
      * The operating system specific file separator.
      */
     public static final String fileSeparator = System.getProperty("file.separator");
+    /**
+     * The main directory where all files for the application reside.
+     */
+    public static File mainDirectory = new File(System.getProperty("user.home") + Controller.fileSeparator + "RoboDogs Live Analyzer" + Controller.fileSeparator + "Data");
     /**
      * Whether or not this is the user's first time saving.
      */
@@ -202,9 +203,13 @@ public class Controller implements Initializable {
      *
      * @see Robotics2442C.DataManager
      */
-    @FXML
-    private void setupApp(ActionEvent actionEvent) throws Exception {
-        DataManager.setupMainFolder();
+    public static void setupApp() {
+        try {
+            DataManager.setupMainFolder();
+            LogError.openSession();
+        } catch (IOException e) {
+            LogError.log(Level.WARNING, e.toString() + ", Controller.setupApp");
+        }
     }
 
     /**
@@ -216,8 +221,13 @@ public class Controller implements Initializable {
      * @see Robotics2442C.DataManager
      */
     @FXML
-    private void newTeam(ActionEvent actionEvent) throws Exception {
-        String teamName = Dialogs.showNewTeamDialog();
+    private void newTeam(ActionEvent actionEvent) {
+        String teamName = null;
+        try {
+            teamName = Dialogs.showNewTeamDialog();
+        } catch (IOException e) {
+            LogError.log(Level.WARNING, e.toString() + ", Controller.newTeam");
+        }
         if (teamName != null && !teams.contains(teamName)) {
             teams.add(teamName);
             DataManager.newTeam(teamName);
@@ -248,8 +258,13 @@ public class Controller implements Initializable {
      * @see Robotics2442C.DataManager
      */
     @FXML
-    private void newMatch(ActionEvent actionEvent) throws Exception {
-        String matchName = Dialogs.showNewMatchDialog();
+    private void newMatch(ActionEvent actionEvent) {
+        String matchName = null;
+        try {
+            matchName = Dialogs.showNewMatchDialog();
+        } catch (IOException e) {
+            LogError.log(Level.WARNING, e.toString() + ", Controller.newMatch");
+        }
         if (currentTeamSelection != null) {
             if (matchName != null) {
                 tableData.add(0, new Match());
@@ -303,12 +318,20 @@ public class Controller implements Initializable {
      * @see Robotics2442C.DataManager
      */
     @FXML
-    private void saveApp(ActionEvent actionEvent) throws IOException {
+    private void saveApp(ActionEvent actionEvent) {
         if (Controller.firstSave) {
-            String fileName = Dialogs.showSetupFileDialog();
-            DataManager.saveApp(fileName);
+            try {
+                String fileName = Dialogs.showSetupFileDialog();
+                DataManager.saveApp(fileName);
+            } catch (IOException e) {
+                LogError.log(Level.WARNING, e.toString() + ", Controller.saveApp, Controller.firstSave == true");
+            }
         } else {
-            DataManager.saveApp();
+            try {
+                DataManager.saveApp();
+            } catch (IOException e) {
+                LogError.log(Level.WARNING, e.toString() + ", Controller.saveApp, Controller.firstSave == false");
+            }
         }
         Controller.firstSave = false;
     }
@@ -318,6 +341,7 @@ public class Controller implements Initializable {
      */
     @FXML
     private void closeApp(ActionEvent actionEvent) {
+        LogError.closeSession();
         System.exit(0);
     }
 
@@ -327,8 +351,12 @@ public class Controller implements Initializable {
      * @see Robotics2442C.Dialogs
      */
     @FXML
-    private void initAllianceSelection(ActionEvent actionEvent) throws IOException {
-        Dialogs.showAllianceSelectionDialog();
+    private void initAllianceSelection(ActionEvent actionEvent) {
+        try {
+            Dialogs.showAllianceSelectionDialog();
+        } catch (IOException e) {
+            LogError.log(Level.WARNING, e.toString() + ", Controller.initAllianceSelection");
+        }
     }
 
     /**
@@ -339,12 +367,5 @@ public class Controller implements Initializable {
     @FXML
     private void initMatchPairing(ActionEvent actionEvent) {
         //
-    }
-
-    /**
-     * Sets the file path of the main directory where all files for the application reside.
-     */
-    public static void setMainDirectory() {
-        Controller.mainDirectory = new File(System.getProperty("user.home") + fileSeparator + "RoboDogs Live Analyzer" + fileSeparator + "Data");
     }
 }

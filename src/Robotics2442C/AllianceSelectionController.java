@@ -11,6 +11,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.net.URL;
 import java.util.*;
+import java.util.logging.Level;
 
 /**
  * The controller for Alliance Selection.
@@ -89,9 +90,8 @@ public class AllianceSelectionController implements Initializable {
             }
             if (DataManager.getMatches(team).length != 0) {
                 winPercent.put(team, (score / DataManager.getMatches(team).length));
-                System.out.println(team + ", " + ((score / DataManager.getMatches(team).length)) + " (getWinPercent)");
             } else {
-                System.out.println(team + " (getWinPercent, zero detected)");
+                LogError.log(Level.INFO, "getWinPercent, " + team + " (zero detected)");
             }
         }
         return winPercent;

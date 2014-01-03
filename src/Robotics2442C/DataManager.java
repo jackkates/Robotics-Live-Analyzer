@@ -24,7 +24,6 @@ public class DataManager {
         String startingPath = System.getProperty("user.home") + Controller.fileSeparator + "RoboDogs Live Analyzer";
         //Create said main directory
         DirectoryTools.makeDirectory(startingPath, "", false);
-        Controller.setMainDirectory();
     }
 
     /**
@@ -95,6 +94,7 @@ public class DataManager {
 
     /**
      * Gets the match with the specified team name and number.
+     *
      * @param teamName  The name of the owning team
      * @param matchName The name of the match to retrieve
      * @return          A match

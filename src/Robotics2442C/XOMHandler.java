@@ -8,6 +8,7 @@ import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 
 /**
  * Handles all xml tasks.
@@ -94,7 +95,7 @@ public class XOMHandler {
                 System.out.println("Saved");
             }
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            LogError.log(Level.INFO, e.toString() + ", XOMHandler.save");
         }
     }
 
@@ -128,8 +129,10 @@ public class XOMHandler {
                     xmlFileParsed.get(teamId).put(matchId, new Match(matchId, redAlliance1, redAlliance2, redAlliance3, blueAlliance1, blueAlliance2, blueAlliance3, redScore, blueScore));
                 }
             }
-        } catch (IOException | ParsingException e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            LogError.log(Level.WARNING, e.toString() + ", XOMHandler.load");
+        } catch (ParsingException e) {
+            LogError.log(Level.SEVERE, e.toString() + ", XOMHandler.load");
         }
         return xmlFileParsed;
     }

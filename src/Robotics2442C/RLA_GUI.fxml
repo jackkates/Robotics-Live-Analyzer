@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- @author Octogonapus -->
+
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.input.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane id="AnchorPane" maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="961.0" prefWidth="1679.0" snapToPixel="true" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Robotics2442C.Controller">
@@ -39,26 +39,24 @@
         </ScrollPane>
       </left>
       <top>
-        <MenuBar disable="false" focusTraversable="false" prefWidth="1651.0" useSystemMenuBar="false" visible="true" fx:id="menuBar">
+        <MenuBar disable="false" focusTraversable="false" prefWidth="1651.0" useSystemMenuBar="false" visible="true" >
           <menus>
-            <Menu mnemonicParsing="true" text="_File" fx:id="fileMenu">
+            <Menu mnemonicParsing="true" text="_File" >
               <items>
-                <MenuItem mnemonicParsing="true" onAction="#setupApp" text="_Setup" />
-                <SeparatorMenuItem mnemonicParsing="true" />
                 <MenuItem mnemonicParsing="true" onAction="#openApp" text="_Open" />
                 <MenuItem mnemonicParsing="true" onAction="#saveApp" text="_Save" />
                 <MenuItem mnemonicParsing="true" onAction="#closeApp" text="_Close" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="true" text="_Edit" fx:id="editMenu">
+            <Menu mnemonicParsing="true" text="_Edit" >
               <items>
-                <Menu mnemonicParsing="true" text="_New...">
+                <Menu mnemonicParsing="true" text="_New..." >
                   <items>
                     <MenuItem mnemonicParsing="true" onAction="#newTeam" text="_Team" />
                     <MenuItem mnemonicParsing="true" onAction="#newMatch" text="_Match" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="true" text="_Delete...">
+                <Menu mnemonicParsing="true" text="_Delete..." >
                   <items>
                     <MenuItem mnemonicParsing="true" onAction="#deleteTeam" text="_Team" />
                     <MenuItem mnemonicParsing="true" onAction="#deleteMatch" text="_Match" />
@@ -66,13 +64,13 @@
                 </Menu>
               </items>
             </Menu>
-            <Menu mnemonicParsing="true" text="_Analyze" fx:id="analyzeMenu">
+            <Menu mnemonicParsing="true" text="_Analyze" >
               <items>
                 <MenuItem mnemonicParsing="true" onAction="#initAllianceSelection" text="_Alliance Selection" />
                 <MenuItem mnemonicParsing="true" onAction="#initMatchPairing" text="_Match Pairing" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="true" text="_Help" fx:id="helpMenu">
+            <Menu mnemonicParsing="true" text="_Help" >
               <items>
                 <MenuItem mnemonicParsing="true" text="_About" />
               </items>
