@@ -5,6 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane id="AnchorPane" maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="961.0" prefWidth="1679.0" snapToPixel="true" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="Robotics2442C.Controller">
@@ -45,23 +46,51 @@
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#setupApp" text="Setup" />
                 <SeparatorMenuItem mnemonicParsing="false" />
-                <MenuItem mnemonicParsing="false" onAction="#openApp" text="Open" />
-                <MenuItem mnemonicParsing="false" onAction="#saveApp" text="Save" />
-                <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Close" />
+                <MenuItem mnemonicParsing="false" onAction="#openApp" text="Open">
+                  <accelerator>
+                    <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                  </accelerator>
+                </MenuItem>
+                <MenuItem mnemonicParsing="false" onAction="#saveApp" text="Save">
+                  <accelerator>
+                    <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                  </accelerator>
+                </MenuItem>
+                <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Close">
+                  <accelerator>
+                    <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                  </accelerator>
+                </MenuItem>
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Edit">
               <items>
                 <Menu mnemonicParsing="false" text="New...">
                   <items>
-                    <MenuItem mnemonicParsing="false" onAction="#newTeam" text="Team" />
-                    <MenuItem mnemonicParsing="false" onAction="#newMatch" text="Match" />
+                    <MenuItem mnemonicParsing="false" onAction="#newTeam" text="Team">
+                      <accelerator>
+                        <KeyCodeCombination alt="UP" code="T" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                      </accelerator>
+                    </MenuItem>
+                    <MenuItem mnemonicParsing="false" onAction="#newMatch" text="Match">
+                      <accelerator>
+                        <KeyCodeCombination alt="UP" code="M" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                      </accelerator>
+                    </MenuItem>
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Delete...">
                   <items>
-                    <MenuItem mnemonicParsing="false" onAction="#deleteTeam" text="Team" />
-                    <MenuItem mnemonicParsing="false" onAction="#deleteMatch" text="Match" />
+                    <MenuItem mnemonicParsing="false" onAction="#deleteTeam" text="Team">
+                      <accelerator>
+                        <KeyCodeCombination alt="UP" code="T" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                      </accelerator>
+                    </MenuItem>
+                    <MenuItem mnemonicParsing="false" onAction="#deleteMatch" text="Match">
+                      <accelerator>
+                        <KeyCodeCombination alt="UP" code="M" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                      </accelerator>
+                    </MenuItem>
                   </items>
                 </Menu>
               </items>

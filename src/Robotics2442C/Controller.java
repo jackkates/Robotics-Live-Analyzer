@@ -258,10 +258,10 @@ public class Controller implements Initializable {
                 tableData.add(0, new Match());
                 tableData.get(0).setMatchName(matchName);
                 DataManager.newMatch(currentTeamSelection, matchName);
+                tableData.clear();
+                Collections.addAll(tableData, DataManager.getMatches(currentTeamSelection));
             }
         }
-        tableData.clear();
-        Collections.addAll(tableData, DataManager.getMatches(currentTeamSelection));
     }
 
     /**
@@ -295,8 +295,8 @@ public class Controller implements Initializable {
         if (file != null) {
             DataManager.openApp(file);
             Collections.addAll(teams, DataManager.getTeamNames());
+            Controller.firstSave = false;
         }
-        Controller.firstSave = false;
     }
 
     /**
