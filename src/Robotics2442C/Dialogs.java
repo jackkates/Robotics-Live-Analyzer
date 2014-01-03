@@ -78,8 +78,6 @@ public class Dialogs {
         Scene scene = new Scene(page);
         stage.setScene(scene);
 
-        AllianceSelectionController controller = loader.getController();
-
         stage.showAndWait();
     }
 }

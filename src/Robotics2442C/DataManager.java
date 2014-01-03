@@ -11,9 +11,9 @@ import java.util.*;
  */
 
 public class DataManager {
-    private static Map<String, Map<String, Match>> xmlFileParsed = new HashMap<String, Map<String, Match>>(0);
+    private static Map<String, Map<String, Match>> xmlFileParsed = new HashMap<>(0);
     public static String fileName = "";
-    private static Map<String, String> winPercentage = new HashMap<String, String>(0);
+    private static Map<String, String> winPercentage = new HashMap<>(0);
 
     /**
      * Creates the main directory where all files for the application reside, and then sets the main directory to the
@@ -33,7 +33,7 @@ public class DataManager {
     public static void testBoundFile() {
         for (Map.Entry<String, Map<String, Match>> entry : xmlFileParsed.entrySet()) {
             System.out.println("\nTeam : " + entry.getKey());
-            Map<String, Match> fileTemp = new HashMap<String, Match>(0);
+            Map<String, Match> fileTemp = new HashMap<>(0);
             fileTemp.putAll(entry.getValue());
             for (Map.Entry<String, Match> entryDeep : fileTemp.entrySet()) {
                 System.out.println("Match : " + entryDeep.getKey());
@@ -95,9 +95,9 @@ public class DataManager {
 
     /**
      * Gets the match with the specified team name and number.
-     * @param teamName The name of the owning team
+     * @param teamName  The name of the owning team
      * @param matchName The name of the match to retrieve
-     * @return
+     * @return          A match
      */
     public static Match getMatch(String teamName, String matchName) {
         return xmlFileParsed.get(teamName).get(matchName);
@@ -156,8 +156,7 @@ public class DataManager {
      * @return  An array of all team names
      */
     public static String[] getTeamNames() {
-        String[] teamNamesArray = (String[]) xmlFileParsed.keySet().toArray();
-        return teamNamesArray;
+        return xmlFileParsed.keySet().toArray(new String[xmlFileParsed.size()]);
     }
 
     /**
@@ -168,11 +167,11 @@ public class DataManager {
      */
     public static String[] getMatchNames(String teamName) {
         Match[] matches = getMatches(teamName);
-        List<String> names = new ArrayList<String>();
+        List<String> names = new ArrayList<>();
         for (Match match : matches) {
             names.add(match.getMatchName());
         }
-        return (String[]) names.toArray();
+        return names.toArray(new String[matches.length]);
     }
 
     /**
@@ -182,8 +181,9 @@ public class DataManager {
      * @return  An array of all matches for a team
      */
     public static Match[] getMatches(String teamName) {
-        Map<String, Match> matches = new HashMap<String, Match>(0);
-        return (Match[]) matches.values().toArray();
+        Map<String, Match> matches = new HashMap<>(0);
+        matches.putAll(xmlFileParsed.get(teamName));
+        return matches.values().toArray(new Match[matches.size()]);
     }
 
     public static void setRedAlliance1(String teamName, String matchName, String redAlliance1) {

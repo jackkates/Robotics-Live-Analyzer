@@ -21,7 +21,7 @@ public class DirectoryTools {
      * @return  Whether or not the file is in the directory
      */
     public static boolean searchDirectory(File directory, String fileName) {
-        ArrayList<File> files = new ArrayList<File>(0);
+        ArrayList<File> files = new ArrayList<>(0);
         Collections.addAll(files, directory.listFiles(new FileFilter() {
             @Override
             public boolean accept(File pathname) {
@@ -54,7 +54,7 @@ public class DirectoryTools {
      */
     public static File[] printDirectory(String directoryPath) {
         File directory = new File(directoryPath);
-        ArrayList<File> files = new ArrayList<File>(0);
+        ArrayList<File> files = new ArrayList<>(0);
         Collections.addAll(files, directory.listFiles(new FileFilter() {
             @Override
             public boolean accept(File pathname) {

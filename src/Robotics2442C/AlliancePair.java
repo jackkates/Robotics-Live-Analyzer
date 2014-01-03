@@ -12,7 +12,7 @@ public class AlliancePair {
     private final SimpleStringProperty teamName = new SimpleStringProperty();
     private final SimpleStringProperty teamWinPercentage = new SimpleStringProperty();
 
-    public AlliancePair() { };
+    public AlliancePair() { }
 
     /**
      * @param teamName  The name of a team which will be displayed in the ListView

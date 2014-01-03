@@ -18,7 +18,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("RLA_GUI.fxml"));
         Parent root = (Parent) loader.load();
-        Controller controller = loader.getController();
         primaryStage.setTitle("RoboDogs Live Analyzer");
         primaryStage.setScene(new Scene(root, 1700, 961));
         primaryStage.setResizable(true);

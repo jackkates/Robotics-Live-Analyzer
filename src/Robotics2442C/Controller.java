@@ -7,11 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -44,7 +41,6 @@ public class Controller implements Initializable {
      * The operating system specific file separator.
      */
     public static final String fileSeparator = System.getProperty("file.separator");
-    private Main mainApp;
     /**
      * Whether or not this is the user's first time saving.
      */
@@ -54,11 +50,11 @@ public class Controller implements Initializable {
      * RLA_GUI.fxml
      */
     @FXML
-    private final ListView<String> teamList = new ListView<String>();
+    private final ListView<String> teamList = new ListView<>();
     private static final ObservableList<String> teams = FXCollections.observableArrayList();
     private String currentTeamSelection;
     @FXML
-    private final TableView<Match> mainTable = new TableView<Match>();
+    private final TableView<Match> mainTable = new TableView<>();
     private static final ObservableList<Match> tableData = FXCollections.observableArrayList();
     private String currentMatchSelection;
 
@@ -83,9 +79,6 @@ public class Controller implements Initializable {
     private TableColumn<Match, String> redScoreColumn;
     @FXML
     private TableColumn<Match, String> blueScoreColumn;
-
-    @FXML
-    private MenuItem newTeamMenuItem;
 
     public Controller() { }
 
@@ -346,13 +339,6 @@ public class Controller implements Initializable {
     @FXML
     private void initMatchPairing(ActionEvent actionEvent) {
         //
-    }
-
-    /**
-     * Convenience method for loading .fxml files.
-     */
-    private Parent load(String name) throws IOException {
-        return FXMLLoader.load(getClass().getResource(name));
     }
 
     /**

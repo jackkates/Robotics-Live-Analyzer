@@ -23,7 +23,7 @@ import java.util.*;
 
 public class AllianceSelectionController implements Initializable {
     @FXML
-    private final TableView<AlliancePair> mainTable = new TableView<AlliancePair>();
+    private final TableView<AlliancePair> mainTable = new TableView<>();
     private static final ObservableList<AlliancePair> tableData = FXCollections.observableArrayList();
     private static AlliancePair alliancePair = new AlliancePair();
 
@@ -63,7 +63,7 @@ public class AllianceSelectionController implements Initializable {
      * @return  A Map containing each team and their respecting win percentage
      */
     private Map<String, Double> getWinPercent(Map<String, Map<String, Match>> xmlFileParsed) {
-        Map<String, Double> winPercent = new HashMap<String, Double>(0);
+        Map<String, Double> winPercent = new HashMap<>(0);
         for (String team : xmlFileParsed.keySet()) {
             double score = 0;
             for (Match match : DataManager.getMatches(team)) {

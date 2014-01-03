@@ -23,12 +23,12 @@ public class XOMHandler {
      * @param xmlFileParsed The data to write
      * @param fileName  The name of a file to write to, or to overwrite
      */
-    public static void save(Map<String, Map<String, Match>> xmlFileParsed, String fileName) {
+    public static void save(Map<String, Map<String, Match>> xmlFileParsed, String fileName) throws IOException {
         //root element
         Element root = new Element("tossUp");
 
         for (Map.Entry<String, Map<String, Match>> entry : xmlFileParsed.entrySet()) {
-            Map<String, Match> fileTemp = new HashMap<String, Match>(0);
+            Map<String, Match> fileTemp = new HashMap<>(0);
             fileTemp.putAll(entry.getValue());
 
             //team element
@@ -95,8 +95,6 @@ public class XOMHandler {
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -108,7 +106,7 @@ public class XOMHandler {
      */
     public static Map<String, Map<String, Match>> load(File xmlFile) {
         Builder builder = new Builder();
-        Map<String, Map<String, Match>> xmlFileParsed = new HashMap<String, Map<String, Match>>(0);
+        Map<String, Map<String, Match>> xmlFileParsed = new HashMap<>(0);
         try {
             Document doc = builder.build(xmlFile);
             Element root = doc.getRootElement();
@@ -130,11 +128,7 @@ public class XOMHandler {
                     xmlFileParsed.get(teamId).put(matchId, new Match(matchId, redAlliance1, redAlliance2, redAlliance3, blueAlliance1, blueAlliance2, blueAlliance3, redScore, blueScore));
                 }
             }
-        } catch (ValidityException e) {
-            e.printStackTrace();
-        } catch (ParsingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (IOException | ParsingException e) {
             e.printStackTrace();
         }
         return xmlFileParsed;
