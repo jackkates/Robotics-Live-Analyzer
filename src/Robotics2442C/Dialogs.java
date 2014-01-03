@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
+ * Handles the creation and projection of all dialogs.
+ *
  * @author jackkates
  * @author Octogonapus
  */

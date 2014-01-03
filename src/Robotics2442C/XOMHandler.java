@@ -9,8 +9,20 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Handles all xml tasks.
+ *
+ * @author Octogonapus
+ */
+
 public class XOMHandler {
 
+    /**
+     * Writes or overwrites a file to the HDD.
+     *
+     * @param xmlFileParsed The data to write
+     * @param fileName  The name of a file to write to, or to overwrite
+     */
     public static void save(Map<String, Map<String, Match>> xmlFileParsed, String fileName) {
         //root element
         Element root = new Element("tossUp");
@@ -88,6 +100,12 @@ public class XOMHandler {
         }
     }
 
+    /**
+     * Loads a file from the HDD into memory.
+     *
+     * @param xmlFile   The path of the file to load
+     * @return  A Map containing the loaded file, serving as the main data structure
+     */
     public static Map<String, Map<String, Match>> load(File xmlFile) {
         Builder builder = new Builder();
         Map<String, Map<String, Match>> xmlFileParsed = new HashMap<String, Map<String, Match>>(0);

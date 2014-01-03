@@ -11,17 +11,19 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
+ * The controller for adding a competition.
+ * <p>
+ *     This controller handles getting the name for a new competition.
+ * </p>
+ *
  * @author jackkates
  */
 
 public class NewCompetitionDialogController implements Initializable {
-
     @FXML
     private TextField newCompField;
-
     @FXML
     private Button addCompetitionButton;
-
     private String competitionName;
 
     @Override

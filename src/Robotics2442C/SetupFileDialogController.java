@@ -11,17 +11,19 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
+ * The controller for saving a file for the first time.
+ * <p>
+ *     This controller handles getting the name for a new file.
+ * </p>
+ *
  * @author Octogonapus
  */
 
 public class SetupFileDialogController implements Initializable {
-
     @FXML
     private TextField fileNameField;
-
     @FXML
     private Button nameFileButton;
-
     private String fileName;
 
     @Override

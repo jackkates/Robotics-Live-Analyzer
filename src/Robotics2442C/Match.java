@@ -3,6 +3,8 @@ package Robotics2442C;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
+ * A simple class to power the TableView for general use.
+ *
  * @author Octogonapus
  * @author jackkates
  */

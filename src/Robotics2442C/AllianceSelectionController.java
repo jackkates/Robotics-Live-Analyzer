@@ -13,6 +13,11 @@ import java.net.URL;
 import java.util.*;
 
 /**
+ * The controller for Alliance Selection.
+ * <p>
+ *     This controller does all the calculations and sorting with Alliance Selection.
+ * </p>
+ *
  * @author Octogonapus
  */
 
@@ -51,6 +56,12 @@ public class AllianceSelectionController implements Initializable {
         }
     }
 
+    /**
+     * Pairs each team with a percent of wins to total matches played.
+     *
+     * @param xmlFileParsed The saved file, parsed into memory by XOMHandler
+     * @return  A Map containing each team and their respecting win percentage
+     */
     private Map<String, Double> getWinPercent(Map<String, Map<String, Match>> xmlFileParsed) {
         Map<String, Double> winPercent = new HashMap<String, Double>(0);
         for (String team : xmlFileParsed.keySet()) {
@@ -86,6 +97,12 @@ public class AllianceSelectionController implements Initializable {
         return winPercent;
     }
 
+    /**
+     * Sorts all teams via win percentage from high to low.
+     *
+     * @param map   A map of all teams and their respective win percentage
+     * @return  A sorted map of all teams and their respective win percentages, from high to low
+     */
     public static Map<String, Double> sortByValue(Map<String, Double> map) {
         List list = new LinkedList(map.entrySet());
         Collections.sort(list, new Comparator() {
@@ -97,8 +114,8 @@ public class AllianceSelectionController implements Initializable {
         });
 
         Map result = new LinkedHashMap();
-        for (Iterator it = list.iterator(); it.hasNext();) {
-            Map.Entry entry = (Map.Entry) it.next();
+        for (Object aList : list) {
+            Map.Entry entry = (Map.Entry) aList;
             result.put(entry.getKey(), entry.getValue());
         }
         return result;

@@ -1,21 +1,21 @@
 package Robotics2442C;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
+ * The controller for deleting a competition.
+ * <p>
+ *     This controller handles the competition delete confirmation button.
+ * </p>
+ *
  * @author Octogonapus
  */
 
 public class DeleteCompetitionDialogController implements Initializable {
-
     private boolean didPress = false;
 
     @Override

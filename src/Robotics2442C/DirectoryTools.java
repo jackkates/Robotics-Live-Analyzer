@@ -6,11 +6,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
+ * Convenience methods for dealing with directories.
+ *
  * @author Octogonapus
  */
 
 public class DirectoryTools {
 
+    /**
+     * Searches a directory for a file.
+     *
+     * @param directory The directory to search
+     * @param fileName  The file to search for
+     * @return  Whether or not the file is in the directory
+     */
     public static boolean searchDirectory(File directory, String fileName) {
         ArrayList<File> files = new ArrayList<File>(0);
         Collections.addAll(files, directory.listFiles(new FileFilter() {
@@ -22,6 +31,12 @@ public class DirectoryTools {
         return files.contains(fileName);
     }
 
+    /**
+     * Gets all directories in a directory
+     *
+     * @param directory The directory to search (Type: File)
+     * @return  An array of files of directories found
+     */
     public static File[] printDirectory(File directory) {
         return directory.listFiles(new FileFilter() {
             @Override
@@ -31,6 +46,12 @@ public class DirectoryTools {
         });
     }
 
+    /**
+     * Gets all directories in a directory
+     *
+     * @param directoryPath The directory to search (Type: String)
+     * @return  An array of files of directories found
+     */
     public static File[] printDirectory(String directoryPath) {
         File directory = new File(directoryPath);
         ArrayList<File> files = new ArrayList<File>(0);
@@ -44,6 +65,12 @@ public class DirectoryTools {
         return files.toArray(filesCaster);
     }
 
+    /**
+     * Gets all files in a directory
+     *
+     * @param directory The directory to search (Type: File)
+     * @return  An array of files of files found
+     */
     public static File[] printDirectoryFiles(File directory) {
         return directory.listFiles(new FileFilter() {
             @Override
@@ -53,6 +80,12 @@ public class DirectoryTools {
         });
     }
 
+    /**
+     * Gets all files in a directory
+     *
+     * @param directoryPath The directory to search (Type: String))
+     * @return  An array of files of files found
+     */
     public static File[] printDirectoryFiles(String directoryPath) {
         File directory = new File(directoryPath);
         return directory.listFiles(new FileFilter() {
@@ -63,6 +96,13 @@ public class DirectoryTools {
         });
     }
 
+    /**
+     * Makes a directory.
+     *
+     * @param rawPath   The file path of the directory the directory will be make in
+     * @param name  The name of the directory to be made
+     * @param addName   Whether or not to add the given name
+     */
     public static void makeDirectory(String rawPath, String name, boolean addName) {
         File directory;
         String path;

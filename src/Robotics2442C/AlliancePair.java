@@ -3,6 +3,8 @@ package Robotics2442C;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
+ * A simple class to power the ListView for Alliance Selection.
+ *
  * @author Octogonapus
  */
 
@@ -12,6 +14,10 @@ public class AlliancePair {
 
     public AlliancePair() { };
 
+    /**
+     * @param teamName  The name of a team which will be displayed in the ListView
+     * @param teamWinPercentage The percentage of wins to total plays which will be displayed with its accompanying team
+     */
     public AlliancePair(String teamName, String teamWinPercentage) {
         this.teamName.set(teamName);
         this.teamWinPercentage.set(teamWinPercentage);

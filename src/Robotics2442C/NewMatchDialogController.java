@@ -11,16 +11,19 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
+ * The controller for adding a match.
+ * <p>
+ *     This controller handles getting the name for a new match.
+ * </p>
+ *
  * @author Octogonapus
  */
 
 public class NewMatchDialogController implements Initializable {
     @FXML
     private TextField newMatchField;
-
     @FXML
     private Button addMatchButton;
-
     private String matchName;
 
     @Override

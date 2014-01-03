@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
+ * The starting file. Loads and shows the main gui.
+ *
  * @author Octogonapus
  */
 
@@ -17,7 +19,6 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("RLA_GUI.fxml"));
         Parent root = (Parent) loader.load();
         Controller controller = loader.getController();
-        controller.setMainApp(this);
         primaryStage.setTitle("RoboDogs Live Analyzer");
         primaryStage.setScene(new Scene(root, 1700, 961));
         primaryStage.setResizable(true);
