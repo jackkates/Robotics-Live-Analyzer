@@ -53,7 +53,6 @@ public class AllianceSelectionController implements Initializable {
             String winPercentage = "" + sortedTeams.get(team) * 100;
             alliancePair.setTeamWinPercentage(winPercentage);
             tableData.add(alliancePair);
-            System.out.println(team + ", " + sortedTeams.get(team) + " (initialize)");
         }
     }
 
@@ -71,27 +70,17 @@ public class AllianceSelectionController implements Initializable {
                 if (match.getRedAlliance1().equals(team) || match.getRedAlliance2().equals(team)) {
                     if (Integer.parseInt(match.getRedScore()) > Integer.parseInt(match.getBlueScore())) {
                         score++;
-                    } else {
-                        score--;
-                        if (score < 0) {
-                            score = 0;
-                        }
                     }
                 } else if (match.getBlueAlliance1().equals(team) || match.getBlueAlliance2().equals(team)) {
                     if (Integer.parseInt(match.getRedScore()) < Integer.parseInt(match.getBlueScore())) {
                         score++;
-                    } else {
-                        score--;
-                        if (score < 0) {
-                            score = 0;
-                        }
                     }
                 }
             }
             if (DataManager.getMatches(team).length != 0) {
                 winPercent.put(team, (score / DataManager.getMatches(team).length));
             } else {
-                LogError.log(Level.INFO, "getWinPercent, " + team + " (zero detected)");
+                LogError.log(Level.INFO, "(zero detected), AllianceSelectionController.getWinPercent {score = " + score + ", team = " + team + ", matches = " + DataManager.getMatches(team).length + "}");
             }
         }
         return winPercent;

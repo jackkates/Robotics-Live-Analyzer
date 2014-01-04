@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.logging.Level;
 
 /**
- * Handles all xml tasks.
+ * Handles all XML tasks.
  *
  * @author Octogonapus
  */
@@ -95,7 +95,7 @@ public class XOMHandler {
                 System.out.println("Saved");
             }
         } catch (UnsupportedEncodingException e) {
-            LogError.log(Level.INFO, e.toString() + ", XOMHandler.save");
+            LogError.log(Level.INFO, e.toString() + ", XOMHandler.save {firstSave = " + Controller.firstSave + ", fileName = " + fileName + "}");
         }
     }
 
@@ -130,9 +130,9 @@ public class XOMHandler {
                 }
             }
         } catch (IOException e) {
-            LogError.log(Level.WARNING, e.toString() + ", XOMHandler.load");
+           LogError.log(Level.WARNING, e.toString() + ", XOMHandler.load {xmlFile = " + xmlFile.toString() + "}");
         } catch (ParsingException e) {
-            LogError.log(Level.SEVERE, e.toString() + ", XOMHandler.load");
+            LogError.log(Level.SEVERE, e.toString() + ", XOMHandler.load {xmlFile = " + xmlFile.toString() + "}");
         }
         return xmlFileParsed;
     }

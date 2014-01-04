@@ -216,7 +216,7 @@ public class Controller implements Initializable {
             DataManager.setupMainFolder();
             LogError.openSession();
         } catch (IOException e) {
-            LogError.log(Level.WARNING, e.toString() + ", Controller.setupApp");
+            e.printStackTrace();
         }
     }
 
@@ -234,7 +234,7 @@ public class Controller implements Initializable {
         try {
             teamName = Dialogs.showNewTeamDialog();
         } catch (IOException e) {
-            LogError.log(Level.WARNING, e.toString() + ", Controller.newTeam");
+            LogError.log(Level.WARNING, e.toString() + ", Controller.newTeam {teamName = null}");
         }
         if (teamName != null && !teams.contains(teamName)) {
             teams.add(teamName);
@@ -271,7 +271,7 @@ public class Controller implements Initializable {
         try {
             matchName = Dialogs.showNewMatchDialog();
         } catch (IOException e) {
-            LogError.log(Level.WARNING, e.toString() + ", Controller.newMatch");
+            LogError.log(Level.WARNING, e.toString() + ", Controller.newMatch {matchName = null}");
         }
         if (currentTeamSelection != null) {
             if (matchName != null) {
@@ -332,13 +332,13 @@ public class Controller implements Initializable {
                 String fileName = Dialogs.showSetupFileDialog();
                 DataManager.saveApp(fileName);
             } catch (IOException e) {
-                LogError.log(Level.WARNING, e.toString() + ", Controller.saveApp, Controller.firstSave == true");
+                LogError.log(Level.WARNING, e.toString() + ", Controller.saveApp {if}");
             }
         } else {
             try {
                 DataManager.saveApp();
             } catch (IOException e) {
-                LogError.log(Level.WARNING, e.toString() + ", Controller.saveApp, Controller.firstSave == false");
+                LogError.log(Level.WARNING, e.toString() + ", Controller.saveApp {else}");
             }
         }
         Controller.firstSave = false;
@@ -362,6 +362,7 @@ public class Controller implements Initializable {
     private void initAllianceSelection(ActionEvent actionEvent) {
         try {
             Dialogs.showAllianceSelectionDialog();
+            throw new IOException("fake");
         } catch (IOException e) {
             LogError.log(Level.WARNING, e.toString() + ", Controller.initAllianceSelection");
         }

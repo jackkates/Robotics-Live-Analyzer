@@ -6,7 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
 /**
- * A basic logging class so a logger is not needed in every class.
+ * Static version of Logger.
  *
  * @author Octogonapus
  */
@@ -14,25 +14,31 @@ import java.util.logging.LogRecord;
 public class LogError {
     private static FileHandler fileHandler;
 
+    private LogError() { }
+
     /**
-     * Open a new session to start logging.
+     * Open a new logging session.
      */
-    public static void openSession() throws IOException {
-        fileHandler = new FileHandler(Controller.mainDirectory.toString() + "Controller-log.%u.%g.txt", true);
+    public static void openSession() {
+        try {
+            fileHandler = new FileHandler(Controller.mainDirectory.toString(), true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
-     * Log an error.
+     * Log a new error.
      *
-     * @param level The level of severity of the error
-     * @param msg   The message to be displayed
+     * @param level The severity level of the error
+     * @param msg   The message to be logged with the error
      */
     public static void log(Level level, String msg) {
         fileHandler.publish(new LogRecord(level, msg));
     }
 
     /**
-     * Close a session and finalize logs.
+     * Close the current logging session.
      */
     public static void closeSession() {
         fileHandler.close();
